@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Six+Caps&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+nav {
+  display: flex;
+  height: 5vh;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.cursor {
+  width: 20vh;
+  height: 20vh;
+  position: relative;
+  border-radius: 50%;
+  transition: 0.1s;
+  transform: translate(-85%, -85%);
+  pointer-events: none;
+  border: 2px dotted #ffffff;
+}
+
+.cursorCont {
+  height: 0;
+  width: 0;
+  position: relative;
+  top: 5vw;
+  left: 5vw;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  cursor: pointer;
+}

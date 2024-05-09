@@ -1,0 +1,255 @@
+.slide1 {
+  position: sticky;
+  bottom: 0;
+  background: #ffffff;
+  width: 100%;
+  z-index: 99;
+  overflow: hidden;
+}
+
+.slide1 .cursor {
+  mix-blend-mode: exclusion;
+  background: #ffffff;
+  z-index: 100;
+}
+
+.intro {
+  display: grid;
+  color: #252c35;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: auto auto;
+  grid-gap: 1em;
+  width: 100%;
+  grid-template-areas:
+    "area area area area area area3 area3 area3"
+    "area2 area2 area2 area2 area2 area2 area2 area2";
+  margin-bottom: 15%;
+}
+
+.intro .firstName {
+  grid-area: area;
+}
+
+.intro .lastName {
+  grid-area: area2;
+}
+
+.intro .desc {
+  grid-area: area3;
+}
+
+.intro .firstName .cont,
+.intro .lastName .cont {
+  font-family: "Six Caps", sans-serif;
+  font-size: clamp(10rem, 45vw, 30rem);
+  font-weight: 600;
+  display: flex;
+  overflow: hidden;
+  padding-left: 5%;
+  width: 100%;
+  height: 1em;
+}
+
+.intro .lastName .cont {
+  gap: 10vw;
+  padding-left: 4%;
+}
+
+.intro .firstName .cont span {
+  transform: translateY(-20%);
+}
+
+.intro .firstName .cont:hover ~ .cursor {
+  transform: scale(17);
+}
+
+
+.intro .lastName .cont span {
+  transform: translateY(-25%);
+}
+
+.desc {
+  display: flex;
+  padding: 8%;
+  padding-left: 15%;
+  padding-right: 15%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  font-size: clamp(0.7rem, 1.8vw, 1.4rem);
+  font-weight: 200;
+  font-family: "Oswald", sans-serif;
+}
+
+.desc .cont {
+  display: grid;
+  grid-row-gap: 2em;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: 1fr;
+}
+
+.desc .cont .el1,
+.desc .cont .el2,
+.desc .cont .el3 {
+  display: flex;
+  flex-direction: column;
+}
+
+.desc .el4 {
+  border: none;
+}
+
+.projIntro {
+  display: grid;
+  color: #ffffff;
+  background: #252c35;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: auto auto;
+  grid-gap: 1em;
+  width: 100%;
+  border-top-left-radius: 10vw;
+  border-top-right-radius: 10vw;
+  grid-template-areas:
+    "areA areA areA areA areA areA areA areA"
+    "areA3 areA3 areA3 areA2 areA2 areA2 areA2 areA2";
+}
+
+.projIntro .el1 {
+  grid-area: areA;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 5%;
+  padding-top: 5%;
+}
+
+.projIntro .el2 {
+  grid-area: areA2;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+.projIntro .el3 {
+  grid-area: areA3;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 15%;
+  padding-bottom: 5%;
+}
+
+.projIntro .el1 .cont,
+.projIntro .el2 .cont {
+  font-family: "Six Caps", sans-serif;
+  font-size: clamp(10rem, 35vw, 30rem);
+  font-weight: 600;
+  display: flex;
+  overflow: hidden;
+  height: 1em;
+  transform: translateY(-5%);
+}
+
+.projIntro .el2 .cont {
+  font-size: clamp(7rem, 30vw, 30rem);
+}
+
+.projIntro .el1 .cont span,
+.projIntro .el2 .cont span {
+  transform: translateY(-15%);
+}
+
+.projIntro .el3 .cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 75%;
+  height: 15%;
+}
+
+.projIntro .el3 .cont .hLine {
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+}
+
+@media (max-width: 730px) {
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    margin-left: 3vw;
+  }
+
+  .intro .firstName,
+  .intro .lastName {
+    width: 100%;
+  }
+
+  .intro .firstName .cont,
+  .intro .lastName .cont {
+    font-family: "Six Caps", sans-serif;
+    font-size: clamp(10rem, 50vw, 15rem);
+    font-weight: 600;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .intro .firstName .cont {
+    padding-left: 2%;
+  }
+
+  .intro .lastName .cont {
+    gap: 0;
+    padding-left: 1%;
+  }
+
+  .intro .firstName .cont span {
+    height: 1em;
+    transform: translateY(-20%);
+  }
+
+  .intro .lastName .cont span {
+    height: 1em;
+    transform: translateY(-25%);
+  }
+
+  .desc {
+    display: flex;
+    padding: 3%;
+    padding-top: 0;
+    padding-right: 15%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    font-size: clamp(0.7rem, 3.8vw, 1.4rem);
+    font-weight: 200;
+    font-family: "Oswald", sans-serif;
+  }
+
+  .desc .cont {
+    width: 60%;
+  }
+
+  .desc .el4 {
+    margin-top: 6%;
+    padding-left: 0;
+  }
+
+  .projIntro .el2,
+  .projIntro .el3 {
+    margin-bottom: 5vh;
+  }
+
+  .projIntro .el1 {
+    margin-top: 5vh;
+  }
+}

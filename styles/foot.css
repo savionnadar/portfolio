@@ -1,0 +1,124 @@
+.foot {
+  position: sticky;
+  bottom: 0;
+  z-index: 95;
+  height: 700vh;
+  width: 100%;
+  background: #252c35;
+  color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .foot {
+    height: 400vh;
+  }
+}
+
+@media (max-width: 512px) {
+  .foot {
+    height: 200vh;
+  }
+}
+
+.foot .wrap {
+  position: sticky;
+  top: 1vh;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.foot a {
+  color: #ffffff;
+  text-transform: capitalize;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+  text-decoration: none;
+}
+
+.top {
+  display: flex;
+  width: 100%;
+}
+
+.foot .head {
+  margin: 3vh;
+  margin-bottom: 0;
+  margin-left: 1vh;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(0.7rem, 2vw, 1.7rem);
+  font-weight: 400;
+}
+
+.foot .top .links {
+  display: flex;
+  position: relative;
+  gap: 0.5vh;
+  height: 70%;
+  flex-direction: column;
+  padding: 2vw;
+  top: 0;
+  font-family: "Oswald", sans-serif;
+  font-weight: 100;
+}
+
+.foot .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.foot .bottom > * {
+  display: flex;
+  justify-content: space-between;
+}
+
+.foot .bottom .brief,
+.foot .bottom .links {
+  margin-left: 1.5vw;
+  margin-right: 2vw;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(1rem, 2vw, 2rem);
+  font-weight: 200;
+}
+
+.foot .bottom .links {
+  margin-bottom: 1vw;
+}
+
+.top .links span {
+  margin-left: 1vw;
+}
+
+.foot .bottom .name {
+  display: flex;
+  gap: 5vw;
+  padding: 1vw;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+
+.foot .bottom .name > * {
+  width: 50%;
+  display: flex;
+}
+
+.foot .firstName .cont,
+.foot .lastName .cont {
+  font-family: "Six Caps", sans-serif;
+  font-size: clamp(7rem, 28vw, 25rem);
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1vw;
+}
+
+.foot .firstName .cont span,
+.foot .lastName .cont span {
+  height: 1em;
+  transform: translateY(-20%);
+}

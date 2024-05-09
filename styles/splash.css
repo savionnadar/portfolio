@@ -1,0 +1,109 @@
+.splash {
+  background: #252c35;
+  display: grid;
+  color: #ffffff;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 15vw 70vw 15vw;
+  grid-template-rows: 10vh 80vh 10vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash .firstName,
+.splash .lastName,
+.greet,
+.key,
+.skill {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.splash .firstName .cont,
+.splash .lastName .cont,
+.key .cont,
+.skill .cont {
+  display: flex;
+  font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+  font-weight: 200;
+  font-family: "Oswald", sans-serif;
+  height: 2em;
+}
+
+.splash .firstName {
+  grid-area: 1/1/2/2;
+}
+
+.splash .firstName .cont {
+  margin-top: 5%;
+  margin-left: 15%;
+  overflow: hidden;
+}
+
+.splash .lastName {
+  grid-area: 1/3/2/4;
+  justify-content: flex-end;
+}
+
+.splash .lastName .cont {
+  overflow: hidden;
+  margin-top: 5%;
+  margin-right: 15%;
+}
+
+.greet {
+  grid-area: 2/2/3/3;
+  justify-content: center;
+  align-items: center;
+}
+
+.greet .cont {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 1.15em;
+  font-weight: 600;
+  font-family: "Six Caps", sans-serif;
+  font-size: clamp(5rem, 30vw, 35rem);
+}
+
+.key {
+  grid-area: 3/1/4/2;
+  align-items: flex-end;
+}
+
+.key .cont {
+  overflow: hidden;
+  margin-bottom: 5%;
+  margin-left: 15%;
+}
+
+.skill {
+  grid-area: 3/2/4/4;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.skill .cont {
+  overflow: hidden;
+  margin-bottom: 1%;
+  margin-right: 2.5%;
+}
+
+.splash .firstName .cont span:not(:first-child),
+.splash .lastName .cont span:not(:first-child),
+.key .cont span:not(:first-child),
+.skill .cont span:not(:first-child) {
+  text-transform: lowercase;
+}
+
+.skill .cont span:nth-child(12) {
+  text-transform: uppercase;
+}

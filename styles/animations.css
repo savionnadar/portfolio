@@ -1,0 +1,185 @@
+@keyframes greetTextRoll {
+  from {
+    transform: translateY(30vw);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(-30vw);
+    opacity: 1;
+  }
+}
+
+@keyframes textRoll {
+  from {
+    transform: translateY(10vw);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(-10vw);
+    opacity: 1;
+  }
+}
+
+@keyframes pageRoll {
+  to {
+    display: none;
+    transform: translateY(-100vh);
+  }
+}
+
+@keyframes lgTextRoll {
+  from {
+    opacity: 0;
+    transform: translateY(90%);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes smTextRoll {
+  from {
+    transform: translateY(1em);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes infScroll {
+  to {
+    transform: translate(-132em);  
+  }
+}
+
+.splash {
+  animation: pageRoll 1.5s ease-in both 1.2s;
+}
+
+.splash .firstName .cont > *,
+.splash .lastName .cont > *,
+.key .cont > *,
+.skill .cont > * {
+  animation: textRoll 2s cubic-bezier(0, 0.59, 1, 0.6) both;
+}
+
+.greet .cont span:nth-child(1) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) both;
+}
+
+.greet .cont span:nth-child(2) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) 0.05s both;
+}
+
+.greet .cont span:nth-child(3) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) 0.1s both;
+}
+
+.greet .cont span:nth-child(4) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) 0.15s both;
+}
+
+.greet .cont span:nth-child(5) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) 0.2s both;
+}
+
+.greet .cont span:nth-child(6) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) 0.25s both;
+}
+
+.greet .cont span:nth-child(7) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) 0.3s both;
+}
+
+.greet .cont span:nth-child(8) {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) 0.35s both;
+}
+
+.intro .firstName .cont span:nth-child(1) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2s both;
+}
+
+.intro .firstName .cont span:nth-child(2) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.05s both;
+}
+
+.intro .firstName .cont span:nth-child(3) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.1s both;
+}
+
+.intro .firstName .cont span:nth-child(4) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.15s both;
+}
+
+.intro .firstName .cont span:nth-child(5) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.2s both;
+}
+
+.intro .firstName .cont span:nth-child(6) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.25s both;
+}
+
+.intro .lastName .cont span:nth-child(1) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2s both;
+}
+
+.intro .lastName .cont span:nth-child(2) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.05s both;
+}
+
+.intro .lastName .cont span:nth-child(3) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.1s both;
+}
+
+.intro .lastName .cont span:nth-child(4) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.15s both;
+}
+
+.intro .lastName .cont span:nth-child(5) {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) 2.2s both;
+}
+
+.desc .cont .el1 span:nth-child(1) {
+  animation: smTextRoll 1.5s both 2.3s;
+}
+
+.desc .cont .el1 span:nth-child(2) {
+  animation: smTextRoll 1.5s both 2.45s;
+}
+
+.desc .cont .el1 span:nth-child(3) {
+  animation: smTextRoll 1.5s both 2.6s;
+}
+
+.desc .cont .el2 span:nth-child(1) {
+  animation: smTextRoll 1.5s both 2.95s;
+}
+
+.desc .cont .el2 span:nth-child(2) {
+  animation: smTextRoll 1.5s both 3.1s;
+}
+
+.desc .cont .el3 span:nth-child(1) {
+  animation: smTextRoll 1.5s both 3.35s;
+}
+
+.desc .cont .el3 span:nth-child(2) {
+  animation: smTextRoll 1.5s both 3.5s;
+}
+
+.desc .el4 a {
+  animation: smTextRoll 1.5s both 4s;
+}
+
+.skills .inner.scroll > * {
+  animation: infScroll 20s linear 2s infinite;
+}
+
+.proj1 .cursor a:hover {
+  transform: scale(1.35);
+}

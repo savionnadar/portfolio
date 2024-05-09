@@ -1,0 +1,160 @@
+.det,
+.preview {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 2%;
+}
+
+.det {
+  left: 0;
+  margin-left: 5%;
+}
+
+.det .name,
+.preview .count {
+  font-family: "Six Caps", sans-serif;
+  font-size: clamp(15rem, 40vw, 35rem);
+  font-weight: 600;
+  display: flex;
+  overflow: hidden;
+  height: 1em
+}
+
+.det .info {
+  font-size: clamp(0.7rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  font-family: "Oswald", sans-serif;
+}
+
+.det .name span,
+.preview .count span {
+  transform: translateY(-15%);
+}
+
+.preview {
+  right: 0;
+  margin-right: 2%;
+}
+
+.preview .count {
+  opacity: 0.35;
+  position: absolute;
+  bottom: 20vh;
+  right: 1vw;
+  z-index: 0;
+}
+
+.preview .cont {
+  position: absolute;
+  bottom: 1vh;
+  right: 3vw;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: saturate(180%) blur(10px);
+  z-index: 1;
+  border-radius: 5vw;
+}
+
+.preview .cont > * {
+  height: 60vh;
+  width: 40vw;
+}
+
+.proj1 {
+  position: sticky;
+  bottom: 0;
+  z-index: 98;
+  height: 100vh;
+  width: 100%;
+  background: #524c8a;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.project .cursor {
+  background: #0000001f;
+  backdrop-filter: saturate(180%) blur(5px);
+  z-index: 99;
+  transition: 0.1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project .cursor a {
+  font-family: "Six Caps", sans-serif;
+  font-size: clamp(2rem, 2.6vw, 5rem);
+  height: 2em;
+  width: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  outline: none;
+  pointer-events: all;
+  transform: ease;
+  text-decoration: none;
+}
+
+.about {
+  overflow: hidden;
+}
+
+.about .cursor {
+  mix-blend-mode: exclusion;
+  background: #ffffff;
+  z-index: 100;
+}
+
+.proj1 .cursor a {
+  transition: all 0.5s ease;
+}
+
+.proj2 {
+  position: sticky;
+  bottom: 0;
+  z-index: 97;
+  height: 100vh;
+  width: 100%;
+  background: #4e6583;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.proj3 {
+  background: #43683f;
+  color: #ffffff;
+  height: 100vh;
+  width: 100%;
+  border-bottom-left-radius: 3%;
+  border-bottom-right-radius: 3%;
+  overflow: hidden;
+}
+
+@media (max-width: 730px) {
+  .det {
+    bottom: 5%;
+    margin-bottom: 0;
+    left: 22%;
+    margin-left: 0;
+  }
+
+  .proj2 .det {
+    left: 16%;
+  }
+
+  .proj3 .det {
+    left: 10%;
+  }
+
+  .preview {
+    position: absolute;
+    bottom: 50vh;
+    margin-bottom: 2%;
+    right: 10vw;
+  }
+
+  .preview .cont > * {
+    height: 40vh;
+    width: 65vw;
+  }  
+}

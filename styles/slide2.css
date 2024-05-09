@@ -1,0 +1,48 @@
+.slide2 {
+  position: sticky;
+  bottom: 0;
+  z-index: 96;
+  height: 100vh;
+  width: 100%;
+  background: #ffffff;
+}
+
+.about {
+  width: 100%;
+  color: #252c35;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-bottom-left-radius: 4vw;
+  border-bottom-right-radius: 4vw;
+}
+
+.about .cursor {
+  transform: translate(-130%, -130%);
+}
+
+.about .pre,
+.about a {
+  font-size: clamp(0.7rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  font-family: "Oswald", sans-serif;
+  opacity: 0.8;
+}
+
+.about a {
+  margin-bottom: 3%;
+}
+
+.about .brief1,
+.about .brief2 {
+  font-family: "Six Caps", sans-serif;
+  font-size: clamp(2.4rem, 10vw, 8rem);
+  font-weight: 600;
+  display: flex;
+  overflow: hidden;
+  height: auto;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 10%;
+}

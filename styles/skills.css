@@ -1,0 +1,36 @@
+.skills {
+  mask: linear-gradient(90deg, transparent, #000000 15%, #000000 85%, transparent);
+  -webkit-mask: linear-gradient(90deg, transparent, #000000 15%, #000000 85%, transparent);
+  width: auto;
+  padding: 1em;
+}
+
+.skills .inner {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 8em;
+  gap: 3em;
+  overflow: hidden;
+}
+
+.skills .inner > * {
+  width: 8em;
+  height: 8em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skills .inner > * > * {
+  background: #ffffff;
+  width: 8em;
+  height: 8em;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Courier", sans-serif;
+  font-size: 0.8em;
+}
