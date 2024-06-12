@@ -26,17 +26,17 @@ const cursor1 = document.querySelector(".slide1 .cursor");
 const cursor2 = document.querySelectorAll(".project .cursor");
 const cursor3 = document.querySelector(".about .cursor")
 
+let cursorTimeout;
+
 document.addEventListener("mousemove", (e) => {
-  cursor1.style.left = e.pageX + "px";
-  cursor1.style.top = e.pageY + "px";
-
-  cursor2.forEach(el => {
-    el.style.left = e.clientX + "px";
-    el.style.top = e.clientY + "px";
-  });
-
-  cursor3.style.left = e.clientX + "px";
-  cursor3.style.top =  `calc(${e.pageY - findHeight(4)}px`;
+  clearTimeout(cursorTimeout);
+  cursorTimeout = setTimeout(() => {
+    cursor1.style.transform = `translate(calc(${e.pageX}px - 50%), calc(${e.pageY}px - 50%)`;
+    cursor2.forEach((el) => {
+      el.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+    });
+    cursor3.style.transform = `translate(calc(${e.clientX}px - 100%), calc(${e.pageY - findHeight(4)}px - 100%))`;
+  }, 16); // 16ms = 60fps
 });
 
 let infScrolled = false;
@@ -60,7 +60,7 @@ window.addEventListener("scroll", () => {
 
       let progressEl = setInterval(() => {
         progressVal++;
-        progressCont.style.background = `conic-gradient( 
+        progressCont.style.background = `conic-gradient(
           #58f198 ${progressVal}%,
           #58f1984d ${progressVal + 10}%
       )`;
@@ -81,7 +81,7 @@ window.addEventListener("scroll", () => {
       let endDuVal = progressEndVal[elDu - 1];
       let progressDuCont = document.querySelector(`.skills .inner .du${elDu}`);
 
-      progressDuCont.style.background = `conic-gradient( 
+      progressDuCont.style.background = `conic-gradient(
           #58f198 ${endDuVal}%,
           #58f1984d ${endDuVal + 10}%)`;
 
