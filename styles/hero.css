@@ -11,7 +11,7 @@
 
 /* ---- Hero ---- */
 .intro {
-  --hero-size: max(6rem, min(45vw, 40dvh, 30rem));
+  --hero-size: max(6rem, min(45vw, 40svh, 30rem));
   display: grid;
   color: var(--color-text);
   grid-template-columns: repeat(8, 1fr);
@@ -75,7 +75,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: min(2.5em, 4dvh);
+  gap: min(2.5em, 4svh);
   width: 100%;
   font-size: var(--text-ui-m);
   font-weight: 200;
@@ -84,7 +84,7 @@
 
 .desc .cont {
   display: grid;
-  grid-row-gap: min(1.6em, 2.5dvh);
+  grid-row-gap: min(1.6em, 2.5svh);
 }
 
 /* "Scroll On..." link with a small mouse icon whose wheel keeps scrolling */
@@ -143,7 +143,7 @@
 
 .projIntro__title {
   font-family: var(--font-display);
-  font-size: min(30vw, 60dvh, 34rem);
+  font-size: min(30vw, 60svh, 34rem);
   font-weight: 600;
   line-height: 0.92;
 }
@@ -156,7 +156,7 @@
 /* ---- Phones / portrait ---- */
 @media (max-width: 730px) {
   .intro {
-    --hero-size: min(50vw, 27dvh);
+    --hero-size: min(50vw, 27svh);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -173,11 +173,11 @@
   }
 
   .desc {
-    padding: 4dvh var(--gutter) 0;
+    padding: 4svh var(--gutter) 0;
     gap: 1.6em;
   }
 
   .projIntro__title {
-    font-size: min(28vw, 40dvh);
+    font-size: min(28vw, 40svh);
   }
 }

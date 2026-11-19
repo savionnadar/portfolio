@@ -20,7 +20,8 @@
   border: var(--border-cursor);
   pointer-events: none;
   visibility: hidden;
-  transform: translate(calc(var(--cursor-x) - 50%), calc(var(--cursor-y) - 50%));
+  transform: translate(calc(var(--cursor-x, -50vw) - 50%), calc(var(--cursor-y, -50vh) - 50%));
+  will-change: transform;
 }
 
 .cursor.is-visible .cursor__ring,

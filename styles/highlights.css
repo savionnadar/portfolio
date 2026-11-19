@@ -12,10 +12,12 @@
   grid-template-areas: "det preview";
   align-items: end;
   column-gap: 3vw;
-  padding: 8dvh var(--gutter) 4dvh;
+  padding: 8svh var(--gutter) 4svh;
 }
 
-.highlight:last-child {
+/* Every slide has rounded bottom corners: the next slide shows through
+   them as this one slides away */
+.highlight {
   border-bottom-left-radius: 3vw;
   border-bottom-right-radius: 3vw;
 }
@@ -32,7 +34,7 @@
   font-size: var(--text-ui-m);
   font-weight: 300;
   font-family: var(--font-ui);
-  margin-bottom: 1dvh;
+  margin-bottom: 1svh;
 }
 
 /* ---- Preview + big counter ---- */
@@ -44,11 +46,11 @@
 
 .preview .count {
   position: absolute;
-  top: 4dvh;
+  top: 4svh;
   right: var(--gutter);
   z-index: 0;
   font-family: var(--font-display);
-  font-size: min(36vw, 50dvh, 35rem);
+  font-size: min(36vw, 50svh, 35rem);
   font-weight: 600;
   line-height: 0.9;
   opacity: 0.35;
@@ -64,7 +66,7 @@
   z-index: 1;
   width: 100%;
   aspect-ratio: 4 / 3;
-  max-height: 72dvh;
+  max-height: 72svh;
   margin-left: auto;
   border-radius: 3vw;
 }
@@ -85,23 +87,23 @@
     grid-template-areas:
       "preview"
       "det";
-    row-gap: 3dvh;
-    padding: 10dvh var(--gutter) 4dvh;
+    row-gap: 3svh;
+    padding: 10svh var(--gutter) 4svh;
   }
 
   .preview .cont {
     aspect-ratio: auto;
-    height: min(44dvh, 72vw);
+    height: min(44svh, 72vw);
     max-height: none;
     margin-inline: auto;
     border-radius: 5vw;
   }
 
   .preview .count {
-    font-size: min(42vw, 26dvh);
+    font-size: min(42vw, 26svh);
   }
 
-  .highlight:last-child {
+  .highlight {
     border-bottom-left-radius: 6vw;
     border-bottom-right-radius: 6vw;
   }

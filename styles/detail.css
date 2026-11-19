@@ -9,7 +9,7 @@
 .detail {
   position: relative;
   min-height: var(--vh);
-  padding: 5dvh var(--gutter) 8dvh;
+  padding: 5svh var(--gutter) 8svh;
   overflow: hidden;
 }
 
@@ -35,10 +35,10 @@
 
 .detail__count {
   position: absolute;
-  top: 2dvh;
+  top: 2svh;
   right: var(--gutter);
   font-family: var(--font-display);
-  font-size: min(30vw, 50dvh, 28rem);
+  font-size: min(30vw, 50svh, 28rem);
   font-weight: 600;
   line-height: 1;
   opacity: 0.35;
@@ -47,7 +47,7 @@
 
 .detail__info {
   position: relative;
-  margin-top: 8dvh;
+  margin-top: 8svh;
   font-family: var(--font-ui);
   font-size: var(--text-ui-m);
   font-weight: 300;
@@ -57,16 +57,12 @@
   position: relative;
 }
 
-.detail__name .split__word > span {
-  animation: lgTextRoll 1.2s cubic-bezier(0.35, 1, 0.77, 1.01) calc(var(--i, 0) * 0.05s) both;
-}
-
 .detail__preview {
   position: relative;
   width: min(100%, 64rem);
   aspect-ratio: 16 / 10;
-  max-height: 70dvh;
-  margin: 5dvh 0;
+  max-height: 70svh;
+  margin: 5svh 0;
 }
 
 .detail__preview img {
@@ -79,7 +75,7 @@
 
 .detail__body {
   display: grid;
-  gap: 4dvh 6vw;
+  gap: 4svh 6vw;
   align-items: start;
 }
 
@@ -114,8 +110,8 @@
   display: flex;
   justify-content: space-between;
   gap: 1em;
-  margin-top: 8dvh;
-  padding-top: 2dvh;
+  margin-top: 8svh;
+  padding-top: 2svh;
   border-top: var(--border-field);
   font-family: var(--font-ui);
   font-weight: 300;
@@ -137,9 +133,9 @@
 
 .detail-state {
   display: grid;
-  gap: 3dvh;
+  gap: 3svh;
   justify-items: start;
-  margin-top: 10dvh;
+  margin-top: 10svh;
   font-family: var(--font-ui);
   font-weight: 300;
   font-size: var(--text-ui-m);

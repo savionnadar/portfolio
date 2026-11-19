@@ -4,7 +4,7 @@
 .projects {
   background: var(--color-bg-light);
   color: var(--color-text);
-  padding: 10dvh var(--gutter) 6dvh;
+  padding: 10svh var(--gutter) 6svh;
 }
 
 .pre {
@@ -19,7 +19,7 @@
   font-size: clamp(5rem, 18vw, 16rem);
   font-weight: 600;
   line-height: 1;
-  margin-bottom: 4dvh;
+  margin-bottom: 4svh;
 }
 
 .project-list {

@@ -6,7 +6,7 @@
   position: relative;
   width: 100%;
   color: var(--color-text);
-  padding: 6dvh var(--gutter) 8dvh;
+  padding: 6svh var(--gutter) 8svh;
   display: flex;
   flex-direction: column;
   background: var(--color-bg-light);
@@ -20,20 +20,22 @@
   font-weight: 300;
   font-family: var(--font-ui);
   opacity: 0.8;
-  margin-bottom: 4dvh;
+  margin-bottom: 4svh;
   align-self: flex-start;
 }
 
 .about .brief1,
 .about .brief2 {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 9vw, 8rem);
+  font-size: clamp(2.2rem, 10.5vw, 10rem);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.12;
+  letter-spacing: 0.03em;
+  word-spacing: 0.12em;
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 3dvh 0 8dvh;
+  margin: 3svh 0 8svh;
 }
 
 .about .brief2 {

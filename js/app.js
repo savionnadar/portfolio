@@ -227,8 +227,10 @@ function renderProjects(entries) {
  * over anything with [data-cursor-link] (a highlight slide or a project row)
  * it turns into an "open" link to that item.
  *
- * Position is written to a single stylesheet rule (--cursor-x / --cursor-y),
- * never to element styles. The target is re-checked on scroll too, so the
+ * Position is written as two custom properties (--cursor-x / --cursor-y) on
+ * the cursor element only, so moving it restyles just the cursor and not the
+ * whole page (writing them on :root made every frame recalc everything, which
+ * made scrolling stutter). The target is re-checked on scroll too, so the
  * link stays correct while slides move under a still pointer.
  */
 function initCursor() {
@@ -240,7 +242,6 @@ function initCursor() {
     return;
   }
 
-  const rule = writeStyles("cursor-position", ":root {}").sheet.cssRules[0];
   let pointer = null;
   let target = null;
   let queued = false;
@@ -265,8 +266,8 @@ function initCursor() {
   const update = () => {
     queued = false;
     if (!pointer) return;
-    rule.style.setProperty("--cursor-x", `${pointer.x}px`);
-    rule.style.setProperty("--cursor-y", `${pointer.y}px`);
+    cursor.style.setProperty("--cursor-x", `${pointer.x}px`);
+    cursor.style.setProperty("--cursor-y", `${pointer.y}px`);
     setTarget(elementUnderPointer()?.closest("[data-cursor-link]") ?? null);
   };
 
@@ -345,10 +346,75 @@ function initSkills() {
   observer.observe(root);
 }
 
+/* ----------------------------------------------------------------- reveals */
+
+/**
+ * Entrance animations. Each element gets .is-revealed exactly once (the CSS in
+ * animations.css plays from that class) and is never watched again.
+ *
+ * - [data-reveal] / [data-reveal-lines]: normal page flow, revealed when they
+ *   scroll into view.
+ * - Curtain layers can't use that: they're pinned underneath the layer above
+ *   from the start, so they always count as "on screen". They're revealed
+ *   instead once the layer covering them has slid half way off the screen.
+ */
+const canObserve = "IntersectionObserver" in window;
+const reveal = (node) => node.classList.add("is-revealed");
+
+/** Wrap each line of [data-reveal-lines] in a clipping box so it can rise into view. */
+function prepareLines(root = document) {
+  for (const paragraph of $$("[data-reveal-lines]", root)) {
+    for (const line of [...paragraph.children]) {
+      line.classList.add("line");
+      line.replaceChildren(el("span", { className: "line__inner" }, [...line.childNodes]));
+    }
+    paragraph.classList.add("stagger");
+  }
+}
+
+function revealOnScroll(nodes) {
+  if (!canObserve) return nodes.forEach(reveal);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        reveal(entry.target);
+        observer.unobserve(entry.target);
+      }
+    },
+    { rootMargin: "0px 0px -12% 0px" }
+  );
+  nodes.forEach((node) => observer.observe(node));
+}
+
+/** Reveal `target` once `cover` (the layer on top of it) is half way off screen. */
+function revealWhenUncovered(target, cover) {
+  if (!target || target.classList.contains("is-revealed")) return;
+  if (!cover || !canObserve) return reveal(target);
+  // The root is the bottom half of the screen; the cover leaves it upwards.
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting || entry.boundingClientRect.bottom > entry.rootBounds.top) return;
+      reveal(target);
+      observer.disconnect();
+    },
+    { rootMargin: "-50% 0px 0px 0px" }
+  );
+  observer.observe(cover);
+}
+
+function initCurtainReveals() {
+  const layers = $$("[data-curtain] > .curtain__layer");
+  layers.forEach((layer, k) => k > 0 && revealWhenUncovered(layer, layers[k - 1]));
+  revealWhenUncovered($(".curtain-reveal__panel[data-reveal]"), layers.at(-1));
+}
+
 /* -------------------------------------------------------------------- boot */
 
 async function init() {
   splitAll();
+  prepareLines();
+  revealOnScroll($$("#about[data-reveal], [data-reveal-lines]"));
 
   initCursor();
   initSkills();
@@ -369,6 +435,8 @@ async function init() {
     console.error(projects.reason);
     showStatus("[data-projects-status]", loadErrorMessage("projects"));
   }
+
+  initCurtainReveals();
 
   // Re-apply a deep link (e.g. index.html#projects) now the stack has its final height.
   if (location.hash) {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Savion Nadar's portfolio website | Computer Science and AI undergraduate." />
+    <script>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Six+Caps&display=swap" />
@@ -33,6 +34,8 @@
       gtag("config", "G-7QN604GJ1K");
     </script>
 
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+    <script src="js/smooth.js" defer></script>
     <script src="js/app.js" defer></script>
   </head>
   <body>
@@ -96,8 +99,8 @@
            underneath while the last highlight slides away, then scrolls normally. -->
       <div class="curtain-reveal">
         <span class="curtain-reveal__anchor" id="projects" aria-hidden="true"></span>
-        <section class="projects curtain-reveal__panel" aria-labelledby="projects-title">
-          <p class="pre">All the things I've built</p>
+        <section class="projects curtain-reveal__panel stagger" aria-labelledby="projects-title" data-reveal>
+          <p class="pre">A few things I have built</p>
           <h2 class="projects__title" id="projects-title">projects</h2>
           <ul class="project-list" data-projects></ul>
           <p class="status" data-projects-status hidden></p>
@@ -105,17 +108,18 @@
         <div class="curtain-reveal__spacer" aria-hidden="true"></div>
       </div>
 
-      <section class="about" id="about" aria-label="About me">
+      <section class="about" id="about" aria-label="About me" data-reveal>
         <p class="pre">A little more about me</p>
-        <p class="brief1">
+        <p class="brief1" data-reveal-lines>
           <span>hey there!</span>
           <span>I'm Savion, a Computer Science</span>
           <span>and AI undergraduate who</span>
           <span>enjoys turning ideas into</span>
           <span>things people can actually use.</span>
         </p>
-        <p class="brief2">
-          <span>Started teaching myself to code in 2019</span>
+        <p class="brief2" data-reveal-lines>
+          <span>Started teaching myself</span>
+          <span>to code in 2019</span>
           <span>and never looked back since...</span>
           <span>it's been tricky at times,</span>
           <span>but I love every bit of it.</span>

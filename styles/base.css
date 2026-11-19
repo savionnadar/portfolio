@@ -5,6 +5,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ---- Smooth scrolling (js/smooth.js, Lenis) ---- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -116,14 +130,14 @@ img {
   line-height: 0.92;
 }
 
-.name--s { --name-size: min(30vw, 56dvh, 34rem); }
-.name--m { --name-size: min(17vw, 34dvh, 20rem); }
-.name--l { --name-size: min(11.5vw, 24dvh, 14rem); }
+.name--s { --name-size: min(30vw, 56svh, 34rem); }
+.name--m { --name-size: min(17vw, 34svh, 20rem); }
+.name--l { --name-size: min(11.5vw, 24svh, 14rem); }
 
 @media (max-width: 900px), (max-aspect-ratio: 4/5) {
-  .name--s { --name-size: min(42vw, 30dvh); }
-  .name--m { --name-size: min(25vw, 20dvh); }
-  .name--l { --name-size: min(18vw, 14dvh); }
+  .name--s { --name-size: min(42vw, 30svh); }
+  .name--m { --name-size: min(25vw, 20svh); }
+  .name--l { --name-size: min(18vw, 14svh); }
 }
 
 /* ---- Status message (load errors etc.) ---- */

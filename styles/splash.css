@@ -21,5 +21,5 @@
   height: 1.15em;
   font-weight: 600;
   font-family: var(--font-display);
-  font-size: min(30vw, 60dvh, 35rem);
+  font-size: min(30vw, 60svh, 35rem);
 }

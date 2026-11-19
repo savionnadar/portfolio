@@ -56,17 +56,19 @@
   /* Layout */
   --gutter: clamp(1rem, 4vw, 4.5rem);
 
-  /* Viewport height (dvh with vh fallback) */
+  /* Viewport heights. They never change while scrolling (unlike dvh, which
+     resizes everything whenever a phone's address bar shows or hides and makes
+     scrolling stutter). --vh is the full screen with the bar hidden (curtain
+     slides); --svh is the screen with the bar showing (footer). */
   --vh: 100vh;
+  --svh: 100vh;
 
-  /* Live cursor position (updated by js/app.js through a stylesheet rule) */
-  --cursor-x: -50vw;
-  --cursor-y: -50vh;
 }
 
-@supports (height: 100dvh) {
+@supports (height: 100lvh) {
   :root {
-    --vh: 100dvh;
+    --vh: 100lvh;
+    --svh: 100svh;
   }
 }
 

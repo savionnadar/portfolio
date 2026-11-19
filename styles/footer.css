@@ -7,14 +7,14 @@
   position: sticky;
   bottom: 0;
   z-index: 0;
-  height: var(--vh);
+  height: var(--svh);
   width: 100%;
   overflow: hidden;
   background: var(--color-bg-dark);
   color: var(--color-text-inverse);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  padding: 6dvh var(--gutter) 2dvh;
+  padding: 6svh var(--gutter) 2svh;
 }
 
 .foot a {
@@ -38,7 +38,7 @@
 .foot .top {
   display: flex;
   flex-wrap: wrap;
-  gap: 3dvh clamp(2.5rem, 10vw, 10rem);
+  gap: 3svh clamp(2.5rem, 10vw, 10rem);
 }
 
 .foot .head {
@@ -46,13 +46,13 @@
   font-size: var(--text-ui-s);
   font-weight: 400;
   opacity: 0.7;
-  margin-bottom: 1.2dvh;
+  margin-bottom: 1.2svh;
 }
 
 .foot .top .links {
   display: flex;
   flex-direction: column;
-  gap: 0.6dvh;
+  gap: 0.6svh;
   font-size: var(--text-ui-m);
 }
 
@@ -83,7 +83,7 @@
   display: flex;
   justify-content: space-between;
   gap: 5vw;
-  margin: 1dvh 0;
+  margin: 1svh 0;
 }
 
 .foot .bottom .name > * {
@@ -94,7 +94,7 @@
 .foot .firstName .cont,
 .foot .lastName .cont {
   font-family: var(--font-display);
-  font-size: min(27vw, 34dvh, 25rem);
+  font-size: min(27vw, 34svh, 25rem);
   font-weight: 600;
   display: flex;
   overflow: hidden;
@@ -114,19 +114,21 @@
     gap: 0.3em;
   }
 
+  /* Both words share the full width, letters spread evenly across it */
   .foot .bottom .name {
-    justify-content: flex-start;
-    gap: 0.25em;
-    font-size: min(24vw, 28dvh);
+    gap: 6vw;
   }
 
-  .foot .bottom .name > * {
-    flex: 0 0 auto;
+  .foot .bottom .name > :first-child {
+    flex: 6;
+  }
+
+  .foot .bottom .name > :last-child {
+    flex: 5;
   }
 
   .foot .firstName .cont,
   .foot .lastName .cont {
-    font-size: inherit;
-    width: auto;
+    font-size: min(30vw, 30svh);
   }
 }
