@@ -1,12 +1,29 @@
 /* =========================================================================
    animations.css — keyframes and entrance animations (staggered with --i)
    ========================================================================= */
+/* How much longer the greeting stays than it used to. The splash and the
+   hero's entrance animations are all pushed back by this much. */
+:root {
+  --splash-hold: 0.9s;
+}
+
+/* Greeting letters rise in, rest in place for a beat, then roll up and out */
 @keyframes greetTextRoll {
-  from {
+  0% {
     transform: translateY(30vw);
     opacity: 0;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
-  to {
+  38% {
+    transform: none;
+    opacity: 1;
+  }
+  72% {
+    transform: none;
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.64, 0, 0.78, 0);
+  }
+  100% {
     transform: translateY(-30vw);
     opacity: 1;
   }
@@ -57,32 +74,32 @@
 }
 
 .splash {
-  animation: pageRoll 1.5s ease-in both 1.2s;
+  animation: pageRoll 1.5s ease-in both calc(1.2s + var(--splash-hold));
 }
 
 .greet .cont > * {
-  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) calc(var(--i, 0) * 0.05s) both;
+  animation: greetTextRoll calc(2s + var(--splash-hold)) linear calc(var(--i, 0) * 0.05s) both;
 }
 
 .intro .firstName .cont > *,
 .intro .lastName .cont > * {
-  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) calc(2s + var(--i, 0) * 0.05s) both;
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) calc(2s + var(--splash-hold) + var(--i, 0) * 0.05s) both;
 }
 
 .desc .cont .el1 > span {
-  animation: smTextRoll 1.5s both calc(2.3s + var(--i, 0) * 0.15s);
+  animation: smTextRoll 1.5s both calc(2.3s + var(--splash-hold) + var(--i, 0) * 0.15s);
 }
 
 .desc .cont .el2 > span {
-  animation: smTextRoll 1.5s both calc(2.95s + var(--i, 0) * 0.15s);
+  animation: smTextRoll 1.5s both calc(2.95s + var(--splash-hold) + var(--i, 0) * 0.15s);
 }
 
 .desc .cont .el3 > span {
-  animation: smTextRoll 1.5s both calc(3.35s + var(--i, 0) * 0.15s);
+  animation: smTextRoll 1.5s both calc(3.35s + var(--splash-hold) + var(--i, 0) * 0.15s);
 }
 
 .desc .el4 a {
-  animation: smTextRoll 1.5s both 4s;
+  animation: smTextRoll 1.5s both calc(4s + var(--splash-hold));
 }
 
 @keyframes scrollCue {
@@ -126,31 +143,40 @@
   }
 }
 
-@keyframes letterRise {
+/* Letters roll up from just below their word, fully solid the whole way */
+@keyframes letterRollUp {
   from {
-    opacity: 0;
-    transform: translateY(45%);
+    transform: translateY(110%);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
 
-/* Highlight slides: title letters rise in, word by word; the rest fades */
+/* Highlight slides: title letters roll up, word by word; the rest fades */
 .split__word:nth-child(2) { --w: 1; }
 .split__word:nth-child(3) { --w: 2; }
 .split__word:nth-child(4) { --w: 3; }
 .split__word:nth-child(5) { --w: 4; }
 .split__word:nth-child(6) { --w: 5; }
 
-.js .highlight:not(.is-revealed) .name .split__word > span,
+/* Each word hides anything below its bottom edge, so letters appear by
+   rolling up out of it rather than fading. Top and sides stay open so whole
+   glyphs still show. */
+.highlight .name .split__word {
+  clip-path: inset(-50% -10% 0 -10%);
+}
+
+.js .highlight:not(.is-revealed) .name .split__word > span {
+  transform: translateY(110%);
+}
+
 .js .highlight:not(.is-revealed) :is(.info, .count) {
   opacity: 0;
 }
 
 .highlight.is-revealed .name .split__word > span {
-  animation: letterRise 1.3s cubic-bezier(0.22, 1, 0.36, 1) calc(0.1s + var(--w, 0) * 0.14s + var(--i, 0) * 0.035s) both;
+  animation: letterRollUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) calc(0.1s + var(--w, 0) * 0.14s + var(--i, 0) * 0.035s) both;
 }
 
 .highlight.is-revealed .info {

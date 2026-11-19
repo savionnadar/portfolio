@@ -12,7 +12,7 @@
     "link": "https://umatter.dbis.in/",
     "image": "visuals/umatter.png",
     "alt": "uMatter's Homepage",
-    "theme": "violet",
+    "theme": "black",
     "year": "2024",
     "visible": true
   },
@@ -29,7 +29,7 @@
     "link": "https://nm.savionnadar.com/",
     "image": "visuals/biomimetic-patch-sim.png",
     "alt": "Biomimetic Patch Simulation Homepage",
-    "theme": "slate",
+    "theme": "grey",
     "year": "2024",
     "visible": true
   },
@@ -43,9 +43,9 @@
       "Notes are created, edited and deleted entirely in the browser and persisted with local storage, so nothing ever leaves the device."
     ],
     "link": "https://savion-scribe.netlify.app/",
-    "image": "visuals/scribe.gif",
+    "image": "visuals/scribe.png",
     "alt": "Scribe notes app with a list of notes",
-    "theme": "forest",
+    "theme": "silver",
     "year": "2023",
     "visible": true
   }

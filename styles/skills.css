@@ -55,6 +55,8 @@
   transition: --progress var(--ring-duration, 2s) linear var(--ring-delay, 0s);
 }
 
-.skills.is-filled .inner > * {
-  animation: infScroll 20s linear 2s infinite;
+/* Always scrolling, with no start delay, so it's already moving when it
+   comes into view (the rings still fill only once it's on screen) */
+.skills .inner > * {
+  animation: infScroll 20s linear infinite;
 }

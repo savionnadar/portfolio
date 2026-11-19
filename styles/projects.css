@@ -37,14 +37,20 @@
   transition:
     background-color 0.4s ease,
     color 0.4s ease,
-    border-radius 0.4s ease;
+    border-radius 0.4s ease,
+    scale 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Rows are wide, so they give a little less when pressed */
+.project-row a:active {
+  scale: 0.985;
 }
 
 .project-row a:hover,
 .project-row a:focus-visible,
 .project-row a.is-cursor-target {
   background: var(--theme-bg, var(--color-bg-dark));
-  color: var(--color-text-inverse);
+  color: var(--theme-text, var(--color-text-inverse));
   border-radius: clamp(0.75rem, 2vw, 2rem);
 }
 

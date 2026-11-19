@@ -9,7 +9,7 @@ const COLLECTIONS = {
   highlight: { url: "data/highlights.json", label: "highlight", back: "index.html#highlights" },
   project: { url: "data/projects.json", label: "project", back: "index.html#projects" },
 };
-const THEMES = ["violet", "slate", "forest"];
+const THEMES = ["black", "silver", "grey"];
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const field = (name) => $(`[data-field="${name}"]`);
@@ -52,7 +52,7 @@ function showState(title, message) {
     el("a", { text: "← back to portfolio", attrs: { href: "index.html" } })
   );
   $("[data-detail-article]").hidden = true;
-  document.title = `${title} | savion nadar`;
+  document.title = `${title.toUpperCase()} | SAVION NADAR`;
   finish();
 }
 
@@ -103,7 +103,7 @@ function render(entry, entries, index, type) {
   renderImage(entry);
   renderPager(entries, index, type);
 
-  document.title = `${entry.title} | savion nadar`;
+  document.title = `${entry.title.toUpperCase()} | SAVION NADAR`;
   if (entry.description) $('meta[name="description"]').setAttribute("content", entry.description);
 
   $("[data-detail-state]").hidden = true;

@@ -1,5 +1,7 @@
 /* =========================================================================
-   splash.css — intro overlay ("welcome!")
+   splash.css — intro overlay with a time-of-day greeting
+   js/app.js picks the greeting and writes --greet-chars (its length), so
+   longer greetings shrink to stay on one line.
    ========================================================================= */
 .splash {
   position: fixed;
@@ -21,5 +23,11 @@
   height: 1.15em;
   font-weight: 600;
   font-family: var(--font-display);
-  font-size: min(30vw, 60svh, 35rem);
+  font-size: min(calc(240vw / var(--greet-chars, 8)), 60svh, 35rem);
+}
+
+/* Hide the placeholder text until it's swapped for the greeting, so it
+   never flashes "welcome!" first */
+.js .greet .cont:not(.split) {
+  visibility: hidden;
 }

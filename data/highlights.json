@@ -12,7 +12,7 @@
     "link": "https://lnkd.in/p/gkvWs45v",
     "image": "visuals/ted.jpg",
     "alt": "Savion Giving a TED Talk",
-    "theme": "violet",
+    "theme": "grey",
     "visible": true
   },
   {
@@ -28,7 +28,7 @@
     "link": "https://umatter.dbis.in/",
     "image": "visuals/umatter-presentation.jpg",
     "alt": "Meeting the Education Officer",
-    "theme": "forest",
+    "theme": "silver",
     "visible": true
   }
 ]

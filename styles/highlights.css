@@ -12,7 +12,7 @@
      next slide's colour, even while both are pinned in the same spot,
      instead of the dark footer at the very back of the page. */
   background: var(--next-bg, var(--color-bg-light));
-  color: var(--color-text-inverse);
+  color: var(--theme-text, var(--color-text-inverse));
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   grid-template-areas: "det preview";

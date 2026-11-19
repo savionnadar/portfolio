@@ -52,7 +52,7 @@
 .foot .top .links {
   display: flex;
   flex-direction: column;
-  gap: 0.6svh;
+  gap: 1.3svh;
   font-size: var(--text-ui-m);
 }
 
@@ -60,6 +60,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
+}
+
+/* Magnetic socials: each link leans towards a nearby pointer and springs
+   back when it leaves (js/app.js writes --pull-x / --pull-y). Links are only
+   as wide as their text so the pull feels centred on the word. */
+.foot .socials .links {
+  align-items: flex-start;
+}
+
+.foot .socials .links a {
+  transform: translate(var(--pull-x, 0px), var(--pull-y, 0px));
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    scale 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 /* ---- Bottom: tagline, giant name, links ---- */

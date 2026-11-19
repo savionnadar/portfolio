@@ -19,6 +19,64 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* ---- Scrollbar: a floating pill with no track ----
+   A native scrollbar always paints a solid strip down the side, so on mouse
+   devices js/app.js hides it (html.has-scrollbar) and draws this pill
+   instead. The page runs right to the edge underneath it, the pill takes a
+   tone that reads on the section beside it (.is-on-dark), and it fades out
+   when the page is still. It can still be dragged. Touch devices keep their
+   own native overlay scrollbar. */
+html.has-scrollbar {
+  scrollbar-width: none;
+}
+
+html.has-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 950;
+  width: 14px;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.scrollbar.is-active {
+  opacity: 1;
+}
+
+.scrollbar__thumb {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  width: 6px;
+  height: var(--thumb-h, 40px);
+  border-radius: 999px;
+  background: var(--color-scrollbar-thumb);
+  transform: translateY(var(--thumb-y, 0px));
+  transition:
+    background-color 0.35s ease,
+    width 0.2s ease;
+}
+
+.scrollbar.is-active .scrollbar__thumb {
+  pointer-events: auto;
+}
+
+.scrollbar.is-on-dark .scrollbar__thumb {
+  background: var(--color-scrollbar-thumb-on-dark);
+}
+
+.scrollbar__thumb:hover,
+.scrollbar.is-dragging .scrollbar__thumb {
+  width: 8px;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -49,10 +107,19 @@ body {
 a {
   color: inherit;
   text-decoration: underline;
+  transition: scale 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 a:hover {
   cursor: pointer;
+}
+
+/* Press feedback: links give slightly while held down, like a real button.
+   Uses the separate `scale` property so it stacks with any transform a link
+   already has (the magnetic socials, the cursor's "open" bubble). Components
+   with their own transition list add `scale` to it. */
+a:active {
+  scale: 0.97;
 }
 
 ul,

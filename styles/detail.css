@@ -3,7 +3,7 @@
    ========================================================================= */
 .detail-page {
   background: var(--theme-bg, var(--color-bg-dark));
-  color: var(--color-text-inverse);
+  color: var(--theme-text, var(--color-text-inverse));
 }
 
 .detail {

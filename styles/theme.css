@@ -3,48 +3,55 @@
    Every colour, gradient, border and shadow used anywhere is defined here.
    ========================================================================= */
 :root {
-  /* Palette */
+  /* Palette: "Pure mono" */
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-ink: #252c35;
-  --color-violet: #3b356f;
-  --color-slate: #374c68;
-  --color-forest: #386b33;
-  --color-green: #2db365;
-  --color-green-faint: #58f1984d;
-  --color-indigo: #4a57a1;
-  --color-yellow: #fde55a;
+  --color-ink: #111111;
+  --color-ink-faint: #11111126;
+  --color-paper: #fbfbfb;
+  --color-silver: #d9d9d9;
+  --color-grey: #5c5c5c;
 
   /* Semantic roles */
   --color-primary: var(--color-ink);
-  --color-secondary: var(--color-white);
-  --color-accent: var(--color-green);
+  --color-secondary: var(--color-paper);
+  --color-accent: var(--color-ink);
   --color-bg-dark: var(--color-ink);
-  --color-bg-light: var(--color-white);
+  --color-bg-light: var(--color-paper);
   --color-text: var(--color-ink);
-  --color-text-inverse: var(--color-white);
-  --color-selection: var(--color-indigo);
-  --color-selection-alt: var(--color-yellow);
-  --color-skill: var(--color-green);
-  --color-skill-track: var(--color-green-faint);
+  /* Text on dark sections (highlights intro, footer, cursor label) */
+  --color-text-inverse: var(--color-paper);
+  --color-selection: var(--color-grey);
+  --color-selection-alt: var(--color-grey);
+  --color-skill: var(--color-ink);
+  --color-skill-track: var(--color-ink-faint);
   --color-glass: rgba(255, 255, 255, 0.25);
-  --color-cursor-glass: #0000001f;
+  /* Dark enough that the yellow "open" label reads on light and dark slides */
+  --color-cursor-glass: #11111199;
+  /* Scrollbar pill: on light sections, and on dark ones */
+  --color-scrollbar-thumb: color-mix(in srgb, var(--color-ink) 38%, var(--color-transparent));
+  --color-scrollbar-thumb-on-dark: color-mix(in srgb, var(--color-white) 50%, var(--color-transparent));
   --color-border: var(--color-ink);
   --color-border-inverse: rgba(255, 255, 255, 0.4);
   --color-shadow: rgba(0, 0, 0, 0.18);
   --color-transparent: transparent;
 
-  /* Highlight / project themes ("theme" in the JSON) */
-  --theme-violet: var(--color-violet);
-  --theme-slate: var(--color-slate);
-  --theme-forest: var(--color-forest);
+  /* Highlight / project themes ("theme" in the JSON): a background and the
+     text colour that reads on it */
+  --theme-black: var(--color-ink);
+  --theme-black-text: var(--color-paper);
+  --theme-silver: var(--color-silver);
+  --theme-silver-text: var(--color-ink);
+  --theme-grey: var(--color-grey);
+  --theme-grey-text: var(--color-paper);
 
   /* Gradients, borders, shadows */
   --gradient-mask-fade: linear-gradient(90deg, var(--color-transparent), var(--color-black) 15%, var(--color-black) 85%, var(--color-transparent));
   --border-cursor: 2px dotted var(--color-white);
   --border-rule: 2px solid var(--color-white);
   --border-row: 1px solid var(--color-border);
-  --border-field: 1px solid var(--color-border-inverse);
+  /* Thin rule in the current text colour, so it shows on light and dark */
+  --border-field: 1px solid color-mix(in srgb, currentColor 40%, var(--color-transparent));
 
   /* Typography */
   --font-display: "Six Caps", sans-serif;
@@ -73,6 +80,6 @@
 }
 
 /* Theme classes */
-.theme-violet { --theme-bg: var(--theme-violet); }
-.theme-slate { --theme-bg: var(--theme-slate); }
-.theme-forest { --theme-bg: var(--theme-forest); }
+.theme-black { --theme-bg: var(--theme-black); --theme-text: var(--theme-black-text); }
+.theme-silver { --theme-bg: var(--theme-silver); --theme-text: var(--theme-silver-text); }
+.theme-grey { --theme-bg: var(--theme-grey); --theme-text: var(--theme-grey-text); }

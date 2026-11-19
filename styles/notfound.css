@@ -1,0 +1,105 @@
+/* =========================================================================
+   notfound.css — 404 page (404.html)
+   Dark like the splash and footer. The big "404" rolls up letter by letter
+   (same motion as the highlight titles); everything else fades in after it.
+   ========================================================================= */
+.nf-page {
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+}
+
+.nf {
+  min-height: var(--svh);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 5svh var(--gutter) 4svh;
+  font-family: var(--font-ui);
+  font-weight: 300;
+}
+
+.nf a {
+  text-decoration: none;
+}
+
+.nf a:hover {
+  text-decoration: underline;
+}
+
+.nf__home {
+  justify-self: start;
+  font-size: var(--text-ui-m);
+}
+
+.nf__center {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2.4svh;
+}
+
+/* ---- Big "404" ---- */
+.nf__code {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: min(60vw, 52svh, 34rem);
+  line-height: 0.92;
+}
+
+.nf__word {
+  display: inline-flex;
+  gap: 0.06em;
+  /* Hide anything below the baseline so digits appear by rolling up */
+  clip-path: inset(-50% -10% 0 -10%);
+}
+
+.nf__word > span {
+  animation: letterRollUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) calc(0.15s + var(--i, 0) * 0.08s) both;
+}
+
+/* ---- Message and links ---- */
+.nf__line {
+  font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem);
+  font-weight: 400;
+}
+
+.nf__sub {
+  max-width: 34ch;
+  font-size: var(--text-ui-m);
+  font-weight: 200;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.nf__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6em 2em;
+  margin-top: 1svh;
+  font-size: var(--text-ui-m);
+  font-weight: 400;
+}
+
+.nf__foot {
+  justify-self: center;
+  font-size: var(--text-ui-s);
+  font-weight: 200;
+  opacity: 0.6;
+}
+
+/* Everything but the digits fades in, top to bottom, after the roll */
+.nf__home,
+.nf__line,
+.nf__sub,
+.nf__links,
+.nf__foot {
+  animation: fadeIn 1.2s ease both;
+}
+
+.nf__home { animation-delay: 0.2s; }
+.nf__line { animation-delay: 0.6s; }
+.nf__sub { animation-delay: 0.75s; }
+.nf__links { animation-delay: 0.9s; }
+.nf__foot { animation-delay: 1.1s; }
