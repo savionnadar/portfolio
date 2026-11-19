@@ -1,0 +1,83 @@
+/* =========================================================================
+   cursor.css — single page-wide cursor (mouse devices only)
+   Two stacked layers that always share the same size and position:
+   - .cursor__ring: white disc that inverts what's under it (default)
+   - .cursor__open: glass "open" link, shown over highlights and projects
+   Switching state never moves or resizes anything: the ring dissolves while
+   the blur, tint and label fade in on the exact same spot, and vice versa.
+   js/app.js toggles .is-visible / .is-open and updates --cursor-x/-y.
+   The wrapper has no position or z-index on purpose, so the ring can blend
+   with the page itself.
+   ========================================================================= */
+.cursor__ring,
+.cursor__open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(var(--vh) * 0.2);
+  height: calc(var(--vh) * 0.2);
+  border-radius: 50%;
+  border: var(--border-cursor);
+  pointer-events: none;
+  visibility: hidden;
+  transform: translate(calc(var(--cursor-x) - 50%), calc(var(--cursor-y) - 50%));
+}
+
+.cursor.is-visible .cursor__ring,
+.cursor.is-visible .cursor__open {
+  visibility: visible;
+}
+
+/* ---- Default: inverting ring ---- */
+.cursor__ring {
+  z-index: 900;
+  background: var(--color-white);
+  mix-blend-mode: exclusion;
+  transition:
+    transform 0.15s ease-out,
+    opacity 0.4s ease;
+}
+
+/* ---- Glass "open" bubble: present but clear until needed ---- */
+.cursor__open {
+  z-index: 901;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: var(--color-transparent);
+  background: var(--color-transparent);
+  -webkit-backdrop-filter: blur(0) saturate(100%);
+  backdrop-filter: blur(0) saturate(100%);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 2.6vw, 4.5rem);
+  color: var(--color-transparent);
+  text-decoration: none;
+  transition:
+    transform 0.15s ease-out,
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease,
+    -webkit-backdrop-filter 0.4s ease,
+    backdrop-filter 0.4s ease;
+}
+
+.cursor.is-open .cursor__ring {
+  opacity: 0;
+}
+
+.cursor.is-open .cursor__open {
+  border-color: var(--color-white);
+  background: var(--color-cursor-glass);
+  -webkit-backdrop-filter: blur(5px) saturate(180%);
+  backdrop-filter: blur(5px) saturate(180%);
+  color: var(--color-text-inverse);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* No mouse (phones, tablets): no cursor at all */
+@media not all and (hover: hover) and (pointer: fine) {
+  .cursor {
+    display: none;
+  }
+}

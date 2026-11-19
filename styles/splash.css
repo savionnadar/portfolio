@@ -1,0 +1,25 @@
+/* =========================================================================
+   splash.css — intro overlay ("welcome!")
+   ========================================================================= */
+.splash {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+  pointer-events: none;
+}
+
+.greet .cont {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.15em;
+  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: min(30vw, 60dvh, 35rem);
+}

@@ -1,0 +1,159 @@
+/* =========================================================================
+   detail.css — shared detail page (detail.html)
+   ========================================================================= */
+.detail-page {
+  background: var(--theme-bg, var(--color-bg-dark));
+  color: var(--color-text-inverse);
+}
+
+.detail {
+  position: relative;
+  min-height: var(--vh);
+  padding: 5dvh var(--gutter) 8dvh;
+  overflow: hidden;
+}
+
+.detail__top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: var(--text-ui-m);
+}
+
+.detail__top a {
+  text-decoration: none;
+}
+
+.detail__top a:hover {
+  text-decoration: underline;
+}
+
+.detail__count {
+  position: absolute;
+  top: 2dvh;
+  right: var(--gutter);
+  font-family: var(--font-display);
+  font-size: min(30vw, 50dvh, 28rem);
+  font-weight: 600;
+  line-height: 1;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.detail__info {
+  position: relative;
+  margin-top: 8dvh;
+  font-family: var(--font-ui);
+  font-size: var(--text-ui-m);
+  font-weight: 300;
+}
+
+.detail__name {
+  position: relative;
+}
+
+.detail__name .split__word > span {
+  animation: lgTextRoll 1.2s cubic-bezier(0.35, 1, 0.77, 1.01) calc(var(--i, 0) * 0.05s) both;
+}
+
+.detail__preview {
+  position: relative;
+  width: min(100%, 64rem);
+  aspect-ratio: 16 / 10;
+  max-height: 70dvh;
+  margin: 5dvh 0;
+}
+
+.detail__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: clamp(1rem, 3vw, 2.5rem);
+}
+
+.detail__body {
+  display: grid;
+  gap: 4dvh 6vw;
+  align-items: start;
+}
+
+.detail__lead {
+  font-family: var(--font-ui);
+  font-size: clamp(1.1rem, 0.8rem + 1.4vw, 2rem);
+  font-weight: 300;
+  max-width: 40ch;
+  margin-bottom: 1em;
+}
+
+.detail__text {
+  display: grid;
+  gap: 1em;
+  font-family: var(--font-ui);
+  font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.2rem);
+  font-weight: 200;
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+/* Plain text link to the live project */
+.detail__link {
+  display: inline-block;
+  margin-top: 2em;
+  font-family: var(--font-ui);
+  font-size: var(--text-ui-m);
+  font-weight: 300;
+}
+
+.detail__pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin-top: 8dvh;
+  padding-top: 2dvh;
+  border-top: var(--border-field);
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: var(--text-ui-m);
+}
+
+.detail__pager a {
+  text-decoration: none;
+}
+
+.detail__pager a:hover {
+  text-decoration: underline;
+}
+
+.detail__pager .is-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.detail-state {
+  display: grid;
+  gap: 3dvh;
+  justify-items: start;
+  margin-top: 10dvh;
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: var(--text-ui-m);
+}
+
+.detail-state h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(5rem, 18vw, 14rem);
+  line-height: 1;
+}
+
+@media (min-width: 900px) {
+  .detail__body {
+    grid-template-columns: 1fr auto;
+  }
+}

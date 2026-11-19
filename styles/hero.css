@@ -1,0 +1,183 @@
+/* =========================================================================
+   hero.css — curtain layer 1: hero (intro) + highlights intro (projIntro)
+   Each part is one viewport tall; type is capped by viewport height so the
+   big names always fit on screen.
+   ========================================================================= */
+.slide1 {
+  background: var(--color-bg-light);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Hero ---- */
+.intro {
+  --hero-size: max(6rem, min(45vw, 40dvh, 30rem));
+  display: grid;
+  color: var(--color-text);
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 1em;
+  width: 100%;
+  height: var(--vh);
+  align-content: center;
+  overflow: hidden;
+  grid-template-areas:
+    "area area area area area area3 area3 area3"
+    "area2 area2 area2 area2 area2 area2 area2 area2";
+}
+
+.intro__heading {
+  display: contents;
+}
+
+.intro .firstName {
+  grid-area: area;
+}
+
+.intro .lastName {
+  grid-area: area2;
+}
+
+.intro .desc {
+  grid-area: area3;
+}
+
+.intro .firstName .cont,
+.intro .lastName .cont {
+  font-family: var(--font-display);
+  font-size: var(--hero-size);
+  font-weight: 600;
+  display: flex;
+  overflow: hidden;
+  padding-left: var(--gutter);
+  width: 100%;
+  height: 1em;
+}
+
+.intro .lastName .cont {
+  justify-content: space-between;
+  padding-right: var(--gutter);
+}
+
+.intro .firstName .cont span {
+  transform: translateY(-20%);
+}
+
+.intro .lastName .cont span {
+  transform: translateY(-25%);
+}
+
+.desc {
+  display: flex;
+  /* bottom padding offsets the upward shift of "nadar" (-25%) so the
+     last line never touches the big letters below it */
+  padding: 0 var(--gutter) calc(var(--hero-size) * 0.25 + 1em) 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: min(2.5em, 4dvh);
+  width: 100%;
+  font-size: var(--text-ui-m);
+  font-weight: 200;
+  font-family: var(--font-ui);
+}
+
+.desc .cont {
+  display: grid;
+  grid-row-gap: min(1.6em, 2.5dvh);
+}
+
+/* "Scroll On..." link with a small mouse icon whose wheel keeps scrolling */
+.desc .el4 a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  text-decoration: none;
+}
+
+.desc .el4 a:hover > span:first-child {
+  text-decoration: underline;
+}
+
+.scroll-cue {
+  position: relative;
+  width: 0.85em;
+  height: 1.35em;
+  border: 1.5px solid currentColor;
+  border-radius: 1em;
+}
+
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0.25em;
+  width: 2px;
+  height: 0.3em;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.desc .cont .el1,
+.desc .cont .el2,
+.desc .cont .el3 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Highlights intro ---- */
+.projIntro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--vh);
+  width: 100%;
+  padding: 0 var(--gutter);
+  color: var(--color-text-inverse);
+  background: var(--color-bg-dark);
+  overflow: hidden;
+  border-top-left-radius: 10vw;
+  border-top-right-radius: 10vw;
+}
+
+.projIntro__title {
+  font-family: var(--font-display);
+  font-size: min(30vw, 60dvh, 34rem);
+  font-weight: 600;
+  line-height: 0.92;
+}
+
+.projIntro__title .cont {
+  display: flex;
+  justify-content: center;
+}
+
+/* ---- Phones / portrait ---- */
+@media (max-width: 730px) {
+  .intro {
+    --hero-size: min(50vw, 27dvh);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .intro .firstName .cont,
+  .intro .lastName .cont {
+    padding-left: var(--gutter);
+  }
+
+  .intro .lastName .cont {
+    justify-content: flex-start;
+  }
+
+  .desc {
+    padding: 4dvh var(--gutter) 0;
+    gap: 1.6em;
+  }
+
+  .projIntro__title {
+    font-size: min(28vw, 40dvh);
+  }
+}

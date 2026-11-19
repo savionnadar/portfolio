@@ -1,0 +1,53 @@
+/* =========================================================================
+   curtain.css — curtain reveal mechanics
+   Every layer is sticky to the bottom of the viewport with a decreasing
+   z-index (written by js/app.js), so each upper layer slides up and away to
+   reveal the stationary layer underneath.
+
+   The footer uses the same trick at the end of the page: all page content
+   sits in <main> above it (z-index 1), and the footer is sticky at the
+   bottom (z-index 0), so the last section slides up to reveal it.
+   ========================================================================= */
+#scrollCont {
+  position: relative;
+  z-index: 1;
+}
+
+.curtain {
+  position: relative;
+}
+
+.curtain__layer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ---- Reveal for a section that can be taller than the screen ----------
+   The wrapper is pulled up by one viewport so it starts underneath the last
+   curtain layer. Its panel is sticky to the top and the one-viewport spacer
+   gives it exactly that long to stay pinned while the layer above slides
+   away; after that it scrolls normally. */
+.curtain-reveal {
+  position: relative;
+  z-index: 0;
+  margin-top: calc(-1 * var(--vh));
+}
+
+.curtain-reveal__panel {
+  position: sticky;
+  top: 0;
+  min-height: var(--vh);
+}
+
+.curtain-reveal__spacer {
+  height: var(--vh);
+}
+
+/* Link target sits where the section is fully revealed */
+.curtain-reveal__anchor {
+  position: absolute;
+  top: var(--vh);
+  left: 0;
+}

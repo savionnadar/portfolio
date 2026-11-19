@@ -1,0 +1,108 @@
+/* =========================================================================
+   highlights.css — curtain layers 2..n+1 (one per visible highlight)
+   Desktop: name bottom-left, preview right. Tablet/phone/portrait: preview
+   on top, name underneath. Background colour comes from the entry's theme.
+   ========================================================================= */
+.highlight {
+  height: var(--vh);
+  background: var(--theme-bg, var(--color-bg-dark));
+  color: var(--color-text-inverse);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-areas: "det preview";
+  align-items: end;
+  column-gap: 3vw;
+  padding: 8dvh var(--gutter) 4dvh;
+}
+
+.highlight:last-child {
+  border-bottom-left-radius: 3vw;
+  border-bottom-right-radius: 3vw;
+}
+
+/* ---- Name + info ---- */
+.det {
+  grid-area: det;
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.det .info {
+  font-size: var(--text-ui-m);
+  font-weight: 300;
+  font-family: var(--font-ui);
+  margin-bottom: 1dvh;
+}
+
+/* ---- Preview + big counter ---- */
+.preview {
+  grid-area: preview;
+  align-self: center;
+  min-width: 0;
+}
+
+.preview .count {
+  position: absolute;
+  top: 4dvh;
+  right: var(--gutter);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: min(36vw, 50dvh, 35rem);
+  font-weight: 600;
+  line-height: 0.9;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.preview .count span {
+  display: block;
+}
+
+.preview .cont {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 72dvh;
+  margin-left: auto;
+  border-radius: 3vw;
+}
+
+.preview .cont img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: inherit;
+}
+
+/* ---- Tablet / phone / portrait screens: stack preview above name ---- */
+@media (max-width: 900px), (max-aspect-ratio: 4/5) {
+  .highlight {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "preview"
+      "det";
+    row-gap: 3dvh;
+    padding: 10dvh var(--gutter) 4dvh;
+  }
+
+  .preview .cont {
+    aspect-ratio: auto;
+    height: min(44dvh, 72vw);
+    max-height: none;
+    margin-inline: auto;
+    border-radius: 5vw;
+  }
+
+  .preview .count {
+    font-size: min(42vw, 26dvh);
+  }
+
+  .highlight:last-child {
+    border-bottom-left-radius: 6vw;
+    border-bottom-right-radius: 6vw;
+  }
+}

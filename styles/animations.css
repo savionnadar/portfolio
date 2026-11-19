@@ -1,0 +1,123 @@
+/* =========================================================================
+   animations.css — keyframes and entrance animations (staggered with --i)
+   ========================================================================= */
+@keyframes greetTextRoll {
+  from {
+    transform: translateY(30vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-30vw);
+    opacity: 1;
+  }
+}
+
+@keyframes textRoll {
+  from {
+    transform: translateY(10vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-10vw);
+    opacity: 1;
+  }
+}
+
+@keyframes pageRoll {
+  to {
+    visibility: hidden;
+    transform: translateY(-100vh);
+  }
+}
+
+@keyframes lgTextRoll {
+  from {
+    opacity: 0;
+    transform: translateY(90%);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes smTextRoll {
+  from {
+    transform: translateY(1em);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes infScroll {
+  to {
+    transform: translateX(calc(var(--skill-count, 12) * -11em));
+  }
+}
+
+.splash {
+  animation: pageRoll 1.5s ease-in both 1.2s;
+}
+
+.greet .cont > * {
+  animation: greetTextRoll 2s cubic-bezier(0, 0.59, 1, 0.6) calc(var(--i, 0) * 0.05s) both;
+}
+
+.intro .firstName .cont > *,
+.intro .lastName .cont > * {
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) calc(2s + var(--i, 0) * 0.05s) both;
+}
+
+.desc .cont .el1 > span {
+  animation: smTextRoll 1.5s both calc(2.3s + var(--i, 0) * 0.15s);
+}
+
+.desc .cont .el2 > span {
+  animation: smTextRoll 1.5s both calc(2.95s + var(--i, 0) * 0.15s);
+}
+
+.desc .cont .el3 > span {
+  animation: smTextRoll 1.5s both calc(3.35s + var(--i, 0) * 0.15s);
+}
+
+.desc .el4 a {
+  animation: smTextRoll 1.5s both 4s;
+}
+
+@keyframes scrollCue {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+}
+
+.scroll-cue::after {
+  animation: scrollCue 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .splash {
+    display: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

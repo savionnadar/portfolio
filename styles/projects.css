@@ -1,0 +1,90 @@
+/* =========================================================================
+   projects.css — projects showcase (continuous scroll)
+   ========================================================================= */
+.projects {
+  background: var(--color-bg-light);
+  color: var(--color-text);
+  padding: 10dvh var(--gutter) 6dvh;
+}
+
+.pre {
+  font-family: var(--font-ui);
+  font-size: var(--text-ui-m);
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.projects__title {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 18vw, 16rem);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 4dvh;
+}
+
+.project-list {
+  border-bottom: var(--border-row);
+}
+
+.project-row a {
+  display: grid;
+  grid-template-columns: 3em minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2vw;
+  padding: clamp(0.75rem, 1.5vw, 1.5rem) clamp(0.5rem, 2vw, 2rem);
+  border-top: var(--border-row);
+  text-decoration: none;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    border-radius 0.4s ease;
+}
+
+.project-row a:hover,
+.project-row a:focus-visible,
+.project-row a.is-cursor-target {
+  background: var(--theme-bg, var(--color-bg-dark));
+  color: var(--color-text-inverse);
+  border-radius: clamp(0.75rem, 2vw, 2rem);
+}
+
+.project-row__count,
+.project-row__info,
+.project-row__cta {
+  font-family: var(--font-ui);
+  font-size: var(--text-ui-s);
+  font-weight: 300;
+}
+
+.project-row__main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25em 3vw;
+}
+
+.project-row__name {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.project-row__cta {
+  white-space: nowrap;
+}
+
+@media (max-width: 730px) {
+  .project-row a {
+    grid-template-columns: 2em minmax(0, 1fr);
+  }
+
+  .project-row__main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-row__cta {
+    display: none;
+  }
+}

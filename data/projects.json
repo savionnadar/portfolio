@@ -1,0 +1,52 @@
+[
+  {
+    "id": "umatter",
+    "title": "uMatter",
+    "info": "react / stream api / chat app",
+    "description": "A safe space for students to reflect, connect, and grow.",
+    "details": [
+      "uMatter is a judgment-free digital platform designed to break the stigma around school counseling and help students reflect, learn, and reach out without fear.",
+      "Built over 5 months with psychiatrists, student surveys, and ethical reviews, the front end is structured into three pillars: Learn (credible resources), Tools (habit and productivity support), and Reach Out (discreet counselor access and the Salus chatbot).",
+      "Key achievements: impacted nearly 500 students, gained attention across Mumbai schools, and presented directly to the Education Inspector of South Mumbai."
+    ],
+    "link": "https://umatter.dbis.in/",
+    "image": "visuals/umatter.png",
+    "alt": "uMatter's Homepage",
+    "theme": "violet",
+    "year": "2024",
+    "visible": true
+  },
+  {
+    "id": "biomimetic-patch-sim",
+    "title": "Biomimetic Patch Simulation",
+    "info": "react / google search api / search engine",
+    "description": "A minimal search interface with web, image and news results.",
+    "details": [
+      "An interactive biomimicry explainer for a glue-free, self-dosing patch that uses tree-frog-inspired pillars for moisture-assisted grip and sweat drainage, and blue-ringed octopus-inspired gel needles that trigger drug release at body heat (35–37 °C) without a battery[cite: 1].",
+      "Built as a self-contained HTML, CSS, and JavaScript app featuring a scaled Canvas cross-section, six guided steps with camera transitions, live temperature and time readouts, and an SVG release curve over 48 hours[cite: 1].",
+      "Key lessons: scaling biological structures across micrometre-to-millimetre dimensions, pacing step-by-step visual explanations, and clearly separating illustrative behavior from real measured data[cite: 1]."
+    ],
+    "link": "https://nm.savionnadar.com/",
+    "image": "visuals/biomimetic-patch-sim.png",
+    "alt": "Biomimetic Patch Simulation Homepage",
+    "theme": "slate",
+    "year": "2024",
+    "visible": true
+  },
+  {
+    "id": "scribe",
+    "title": "scribe",
+    "info": "static / local storage / notes app",
+    "description": "A privacy-friendly notes app that stores everything in the browser.",
+    "details": [
+      "Scribe is a lightweight notes app written in plain HTML, CSS and JavaScript.",
+      "Notes are created, edited and deleted entirely in the browser and persisted with local storage, so nothing ever leaves the device."
+    ],
+    "link": "https://savion-scribe.netlify.app/",
+    "image": "visuals/scribe.gif",
+    "alt": "Scribe notes app with a list of notes",
+    "theme": "forest",
+    "year": "2023",
+    "visible": true
+  }
+]

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Savion Nadar's portfolio website | Computer Science and AI undergraduate." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Six+Caps&display=swap" />
+    <link rel="stylesheet" href="styles/theme.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/cursor.css" />
+    <link rel="stylesheet" href="styles/splash.css" />
+    <link rel="stylesheet" href="styles/curtain.css" />
+    <link rel="stylesheet" href="styles/hero.css" />
+    <link rel="stylesheet" href="styles/highlights.css" />
+    <link rel="stylesheet" href="styles/projects.css" />
+    <link rel="stylesheet" href="styles/about.css" />
+    <link rel="stylesheet" href="styles/skills.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="icon" type="image/x-icon" href="visuals/favicon.ico" />
+    <title>portfolio | savion nadar</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QN604GJ1K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-7QN604GJ1K");
+    </script>
+
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <!-- Splash: letters are split into animated spans by js/app.js -->
+    <div class="splash" aria-hidden="true">
+      <div class="greet"><div class="cont" data-split>welcome!</div></div>
+    </div>
+
+    <main id="scrollCont">
+      <!-- ==============================================================
+           Curtain reveal stack
+           Layer 1: hero + highlights intro
+           Layers 2..n+1: one slide per visible entry in highlights.json
+           ============================================================== -->
+      <div class="curtain" data-curtain>
+        <section class="slide1 curtain__layer" id="home">
+
+          <div class="intro">
+            <h1 class="intro__heading" aria-label="Savion Nadar">
+              <span class="firstName"><span class="cont" data-split aria-hidden="true">savion</span></span>
+              <span class="lastName"><span class="cont" data-split aria-hidden="true">nadar</span></span>
+            </h1>
+            <div class="desc">
+              <div class="cont">
+                <p class="el1 stagger">
+                  <span>I'm a Computer Science and</span>
+                  <span>AI undergrad; self-taught</span>
+                  <span>since 2019.</span>
+                </p>
+                <p class="el2 stagger">
+                  <span>I like hard problems,</span>
+                  <span>and I finish what I start.</span>
+                </p>
+                <p class="el3 stagger">
+                  <span>Philippians 4:13</span>
+                </p>
+              </div>
+              <div class="el4">
+                <a href="#highlights">
+                  <span>Scroll On...</span>
+                  <span class="scroll-cue" aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="projIntro" id="highlights">
+            <h2 class="projIntro__title" aria-label="Highlights">
+              <span class="cont" data-split aria-hidden="true">highlights</span>
+            </h2>
+          </div>
+        </section>
+        <!-- Highlight slides are appended here by js/app.js -->
+      </div>
+      <p class="status" data-highlights-status hidden></p>
+
+      <!-- ==============================================================
+           Continuous scrolling from here on
+           ============================================================== -->
+      <!-- Curtain reveal for a section taller than the screen: it stays pinned
+           underneath while the last highlight slides away, then scrolls normally. -->
+      <div class="curtain-reveal">
+        <span class="curtain-reveal__anchor" id="projects" aria-hidden="true"></span>
+        <section class="projects curtain-reveal__panel" aria-labelledby="projects-title">
+          <p class="pre">All the things I've built</p>
+          <h2 class="projects__title" id="projects-title">projects</h2>
+          <ul class="project-list" data-projects></ul>
+          <p class="status" data-projects-status hidden></p>
+        </section>
+        <div class="curtain-reveal__spacer" aria-hidden="true"></div>
+      </div>
+
+      <section class="about" id="about" aria-label="About me">
+        <p class="pre">A little more about me</p>
+        <p class="brief1">
+          <span>hey there!</span>
+          <span>I'm Savion, a Computer Science</span>
+          <span>and AI undergraduate who</span>
+          <span>enjoys turning ideas into</span>
+          <span>things people can actually use.</span>
+        </p>
+        <p class="brief2">
+          <span>Started teaching myself to code in 2019</span>
+          <span>and never looked back since...</span>
+          <span>it's been tricky at times,</span>
+          <span>but I love every bit of it.</span>
+        </p>
+
+        <!-- Skills: edit the list; js/app.js builds the looping marquee and rings.
+             data-level is the percentage each ring fills to. -->
+        <div class="skills" data-skills>
+          <ul class="inner" aria-label="Skills">
+            <li data-level="95">HTML</li>
+            <li data-level="85">CSS</li>
+            <li data-level="75">JavaScript</li>
+            <li data-level="70">React</li>
+            <li data-level="100">Responsive Design</li>
+            <li data-level="80">Animations</li>
+            <li data-level="60">API's</li>
+            <li data-level="60">NodeJS</li>
+            <li data-level="80">Python</li>
+            <li data-level="75">CLI</li>
+            <li data-level="100">AI Prompts</li>
+            <li data-level="60">Databases</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- Revealed by the curtain effect: sticky underneath <main> -->
+    <footer class="foot" id="contact">
+      <div class="top">
+        <div class="siteMap">
+          <p class="head">Sitemap</p>
+          <nav class="links" aria-label="Sitemap">
+            <a href="#home">Home</a>
+            <a href="#highlights">Highlights</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+          </nav>
+        </div>
+        <div class="socials">
+          <p class="head">Socials</p>
+          <div class="links">
+            <a href="https://github.com/savionnadar/" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.instagram.com/savionnadar" target="_blank" rel="noopener">
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+              <span>Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="brief">
+          <span>Computer Science and AI Undergraduate</span>
+        </div>
+        <div class="name" aria-hidden="true">
+          <div class="firstName"><div class="cont" data-split>savion</div></div>
+          <div class="lastName"><div class="cont" data-split>nadar</div></div>
+        </div>
+        <div class="links">
+          <a href="mailto:savion.anscilim@gmail.com">email me</a>
+          <a href="#home">back to top</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- One page-wide cursor. "open" appears over a highlight or a project
+         and links to whatever is under the pointer (see js/app.js). -->
+    <div class="cursor" data-cursor aria-hidden="true">
+      <div class="cursor__ring"></div>
+      <a class="cursor__open" href="#" tabindex="-1" data-cursor-open>open</a>
+    </div>
+
+    <script src="https://kit.fontawesome.com/69fd6beb52.js" crossorigin="anonymous"></script>
+  </body>
+</html>

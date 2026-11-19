@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A closer look at a project by Savion Nadar." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Six+Caps&display=swap" />
+    <link rel="stylesheet" href="styles/theme.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/detail.css" />
+    <link rel="stylesheet" href="styles/animations.css" />
+    <link rel="icon" type="image/x-icon" href="visuals/favicon.ico" />
+    <title>details | savion nadar</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7QN604GJ1K"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-7QN604GJ1K");
+    </script>
+
+    <script src="js/detail.js" defer></script>
+  </head>
+  <body class="detail-page">
+    <main class="detail" aria-busy="true" data-detail>
+      <div class="detail__top">
+        <a href="index.html" data-back-link>← <span data-back-label>back to portfolio</span></a>
+        <span data-field="type"></span>
+      </div>
+
+      <!-- Loading / not found / error -->
+      <div class="detail-state" data-detail-state role="status" aria-live="polite">
+        <p>loading...</p>
+      </div>
+
+      <!-- Filled in by js/detail.js -->
+      <article data-detail-article hidden>
+        <div class="detail__count" data-field="count" aria-hidden="true"></div>
+        <p class="detail__info" data-field="info"></p>
+        <h1 class="detail__name display-name" data-field="title"></h1>
+
+        <div class="detail__preview" data-field="media" hidden>
+          <img data-field="image" alt="" decoding="async" width="1600" height="1000" />
+        </div>
+
+        <div class="detail__body">
+          <div>
+            <p class="detail__lead" data-field="description"></p>
+            <div class="detail__text" data-field="details"></div>
+            <a class="detail__link" data-field="link" target="_blank" rel="noopener" hidden>visit live site ↗</a>
+          </div>
+        </div>
+
+        <nav class="detail__pager" data-field="pager" aria-label="More" hidden></nav>
+      </article>
+    </main>
+  </body>
+</html>

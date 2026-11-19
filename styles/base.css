@@ -1,0 +1,141 @@
+/* =========================================================================
+   base.css — reset, global elements and shared utilities
+   ========================================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  background: var(--color-bg-light);
+  overflow-x: clip;
+}
+
+::-moz-selection {
+  color: var(--color-selection-alt);
+}
+
+::selection {
+  color: var(--color-selection);
+}
+
+:focus-visible {
+  outline: 2px dotted currentColor;
+  outline-offset: 4px;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---- Split text --------------------------------------------------------
+   js/app.js turns [data-split] text into one <span> per letter
+   ([data-split="words"] also groups letters per word so long titles wrap).
+   --i is each letter's index, used for staggered animation delays. */
+.split__space {
+  visibility: hidden;
+}
+
+.split__word {
+  display: inline-flex;
+  height: 1em;
+  overflow: hidden;
+}
+
+:is(.split, .stagger, .split__word) > :nth-child(1) { --i: 0; }
+:is(.split, .stagger, .split__word) > :nth-child(2) { --i: 1; }
+:is(.split, .stagger, .split__word) > :nth-child(3) { --i: 2; }
+:is(.split, .stagger, .split__word) > :nth-child(4) { --i: 3; }
+:is(.split, .stagger, .split__word) > :nth-child(5) { --i: 4; }
+:is(.split, .stagger, .split__word) > :nth-child(6) { --i: 5; }
+:is(.split, .stagger, .split__word) > :nth-child(7) { --i: 6; }
+:is(.split, .stagger, .split__word) > :nth-child(8) { --i: 7; }
+:is(.split, .stagger, .split__word) > :nth-child(9) { --i: 8; }
+:is(.split, .stagger, .split__word) > :nth-child(10) { --i: 9; }
+:is(.split, .stagger, .split__word) > :nth-child(11) { --i: 10; }
+:is(.split, .stagger, .split__word) > :nth-child(12) { --i: 11; }
+:is(.split, .stagger, .split__word) > :nth-child(13) { --i: 12; }
+:is(.split, .stagger, .split__word) > :nth-child(14) { --i: 13; }
+:is(.split, .stagger, .split__word) > :nth-child(15) { --i: 14; }
+:is(.split, .stagger, .split__word) > :nth-child(16) { --i: 15; }
+
+/* ---- Display names -----------------------------------------------------
+   Large Six Caps titles that come from JSON. js/app.js adds a size class by
+   title length so short names stay huge and long names wrap and still fit. */
+.display-name {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.18em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  font-size: var(--name-size);
+}
+
+/* Show whole glyphs: no clipping box or upward shift on wrapped titles */
+.display-name .split__word {
+  height: auto;
+  overflow: visible;
+  line-height: 0.92;
+}
+
+.name--s { --name-size: min(30vw, 56dvh, 34rem); }
+.name--m { --name-size: min(17vw, 34dvh, 20rem); }
+.name--l { --name-size: min(11.5vw, 24dvh, 14rem); }
+
+@media (max-width: 900px), (max-aspect-ratio: 4/5) {
+  .name--s { --name-size: min(42vw, 30dvh); }
+  .name--m { --name-size: min(25vw, 20dvh); }
+  .name--l { --name-size: min(18vw, 14dvh); }
+}
+
+/* ---- Status message (load errors etc.) ---- */
+.status {
+  font-family: var(--font-ui);
+  font-weight: 300;
+  font-size: var(--text-ui-s);
+  padding: 1em 1.4em;
+  margin: 1.5em var(--gutter);
+  border: var(--border-cursor);
+  border-color: currentColor;
+  border-radius: 1em;
+  background: var(--color-bg-light);
+  color: var(--color-text);
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "interact-vp",
+    "title": "Interact Vice President",
+    "info": "react / google search api / search engine",
+    "description": "A minimal search engine front-end with web, image and news results, powered by Google's search API.",
+    "details": [
+      "Nexus started as a question: how much of a search engine is the interface? Quite a lot, it turns out.",
+      "I built routing between result types, debounced queries to keep API usage sensible, and clear loading states so the app never feels stuck.",
+      "It was my deepest dive into a third-party API so far, rate limits and inconsistent responses included."
+    ],
+    "link": "https://savion-nexus.netlify.app/",
+    "image": "visuals/nexus.gif",
+    "alt": "Animated preview of the Nexus search engine",
+    "theme": "slate",
+    "visible": false
+  },
+  {
+    "id": "ted",
+    "title": "TedEd Student Talks",
+    "info": "Club Mentor",
+    "description": "Led members of the TED-Ed club at DBIS alongside co-leads and mentors to guide diverse student talks through a rigorous process while discovering a new passion for Mathematics.",
+    "details": [
+      "Led and guided members of the TED-Ed club at DBIS alongside Riaan Rao and Arnav Daftari, helping students with diverse interests push through a rigorous process and deliver their talks.",
+      "Worked closely with mentors Ms. Aarti Malik and Ms. Adelle Almeida to stay on track amid tight schedules and exams while iterating on feedback step by step.",
+      "Key takeaway: the experience sparked an unexpected admiration for Mathematics that shaped my direction for my Mathematics extended essay."
+    ],
+    "link": "https://lnkd.in/p/gkvWs45v",
+    "image": "visuals/ted.jpg",
+    "alt": "Savion Giving a TED Talk",
+    "theme": "violet",
+    "visible": true
+  },
+  {
+    "id": "umatter",
+    "title": "uMatter",
+    "info": "Recogninsed by the Education Officer",
+    "description": "A safe space for students to reflect, connect, and grow.",
+    "details": [
+      "uMatter is a judgment-free digital platform designed to break the stigma around school counseling and help students reflect, learn, and reach out without fear.",
+      "Built over 5 months with psychiatrists, student surveys, and ethical reviews, the front end is structured into three pillars: Learn (credible resources), Tools (habit and productivity support), and Reach Out (discreet counselor access and the Salus chatbot).",
+      "Key achievements: impacted nearly 500 students, gained attention across Mumbai schools, and presented directly to the Education Inspector of South Mumbai."
+    ],
+    "link": "https://umatter.dbis.in/",
+    "image": "visuals/umatter-presentation.jpg",
+    "alt": "Meeting the Education Officer",
+    "theme": "forest",
+    "visible": true
+  }
+]

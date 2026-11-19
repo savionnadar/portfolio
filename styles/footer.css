@@ -1,0 +1,132 @@
+/* =========================================================================
+   footer.css — stationary footer, revealed by the curtain effect
+   It is sticky at the bottom underneath <main> (see curtain.css), and is
+   exactly one viewport tall so all of it is visible while it's revealed.
+   ========================================================================= */
+.foot {
+  position: sticky;
+  bottom: 0;
+  z-index: 0;
+  height: var(--vh);
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-bg-dark);
+  color: var(--color-text-inverse);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 6dvh var(--gutter) 2dvh;
+}
+
+.foot a {
+  color: var(--color-text-inverse);
+  text-transform: capitalize;
+  font-family: var(--font-ui);
+  font-weight: 200;
+  text-decoration: none;
+}
+
+.foot a:hover {
+  text-decoration: underline;
+}
+
+.foot .fa-brands {
+  color: var(--color-text-inverse);
+  width: 1.2em;
+}
+
+/* ---- Top: sitemap + socials ---- */
+.foot .top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3dvh clamp(2.5rem, 10vw, 10rem);
+}
+
+.foot .head {
+  font-family: var(--font-ui);
+  font-size: var(--text-ui-s);
+  font-weight: 400;
+  opacity: 0.7;
+  margin-bottom: 1.2dvh;
+}
+
+.foot .top .links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6dvh;
+  font-size: var(--text-ui-m);
+}
+
+.foot .top .links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+/* ---- Bottom: tagline, giant name, links ---- */
+.foot .bottom {
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.foot .bottom .brief,
+.foot .bottom .links {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  font-family: var(--font-ui);
+  font-size: var(--text-ui-m);
+  font-weight: 200;
+}
+
+.foot .bottom .name {
+  display: flex;
+  justify-content: space-between;
+  gap: 5vw;
+  margin: 1dvh 0;
+}
+
+.foot .bottom .name > * {
+  flex: 1;
+  display: flex;
+}
+
+.foot .firstName .cont,
+.foot .lastName .cont {
+  font-family: var(--font-display);
+  font-size: min(27vw, 34dvh, 25rem);
+  font-weight: 600;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 1em;
+  justify-content: space-between;
+}
+
+.foot .firstName .cont span,
+.foot .lastName .cont span {
+  transform: translateY(-20%);
+}
+
+@media (max-width: 730px) {
+  .foot .bottom .brief {
+    flex-direction: column;
+    gap: 0.3em;
+  }
+
+  .foot .bottom .name {
+    justify-content: flex-start;
+    gap: 0.25em;
+    font-size: min(24vw, 28dvh);
+  }
+
+  .foot .bottom .name > * {
+    flex: 0 0 auto;
+  }
+
+  .foot .firstName .cont,
+  .foot .lastName .cont {
+    font-size: inherit;
+    width: auto;
+  }
+}

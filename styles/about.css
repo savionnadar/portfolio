@@ -1,0 +1,48 @@
+/* =========================================================================
+   about.css — manifesto / "a little more about me"
+   Rounded bottom corners reveal the footer underneath.
+   ========================================================================= */
+.about {
+  position: relative;
+  width: 100%;
+  color: var(--color-text);
+  padding: 6dvh var(--gutter) 8dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-light);
+  border-bottom-left-radius: 4vw;
+  border-bottom-right-radius: 4vw;
+  overflow: hidden;
+}
+
+.about > a {
+  font-size: var(--text-ui-m);
+  font-weight: 300;
+  font-family: var(--font-ui);
+  opacity: 0.8;
+  margin-bottom: 4dvh;
+  align-self: flex-start;
+}
+
+.about .brief1,
+.about .brief2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 9vw, 8rem);
+  font-weight: 600;
+  line-height: 1.05;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 3dvh 0 8dvh;
+}
+
+.about .brief2 {
+  margin-top: 0;
+}
+
+@media (max-width: 730px) {
+  .about {
+    border-bottom-left-radius: 8vw;
+    border-bottom-right-radius: 8vw;
+  }
+}

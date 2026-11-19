@@ -1,0 +1,76 @@
+/* =========================================================================
+   theme.css — design tokens
+   Every colour, gradient, border and shadow used anywhere is defined here.
+   ========================================================================= */
+:root {
+  /* Palette */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-ink: #252c35;
+  --color-violet: #524c8a;
+  --color-slate: #4e6583;
+  --color-forest: #43683f;
+  --color-green: #58f198;
+  --color-green-faint: #58f1984d;
+  --color-indigo: #4a57a1;
+  --color-yellow: #fde55a;
+
+  /* Semantic roles */
+  --color-primary: var(--color-ink);
+  --color-secondary: var(--color-white);
+  --color-accent: var(--color-green);
+  --color-bg-dark: var(--color-ink);
+  --color-bg-light: var(--color-white);
+  --color-text: var(--color-ink);
+  --color-text-inverse: var(--color-white);
+  --color-selection: var(--color-indigo);
+  --color-selection-alt: var(--color-yellow);
+  --color-skill: var(--color-green);
+  --color-skill-track: var(--color-green-faint);
+  --color-glass: rgba(255, 255, 255, 0.25);
+  --color-cursor-glass: #0000001f;
+  --color-border: var(--color-ink);
+  --color-border-inverse: rgba(255, 255, 255, 0.4);
+  --color-shadow: rgba(0, 0, 0, 0.18);
+  --color-transparent: transparent;
+
+  /* Highlight / project themes ("theme" in the JSON) */
+  --theme-violet: var(--color-violet);
+  --theme-slate: var(--color-slate);
+  --theme-forest: var(--color-forest);
+
+  /* Gradients, borders, shadows */
+  --gradient-mask-fade: linear-gradient(90deg, var(--color-transparent), var(--color-black) 15%, var(--color-black) 85%, var(--color-transparent));
+  --border-cursor: 2px dotted var(--color-white);
+  --border-rule: 2px solid var(--color-white);
+  --border-row: 1px solid var(--color-border);
+  --border-field: 1px solid var(--color-border-inverse);
+
+  /* Typography */
+  --font-display: "Six Caps", sans-serif;
+  --font-ui: "Oswald", sans-serif;
+  --font-mono: "Courier", monospace;
+  --text-ui-s: clamp(0.75rem, 0.65rem + 0.5vw, 1.1rem);
+  --text-ui-m: clamp(0.85rem, 0.7rem + 0.9vw, 1.5rem);
+
+  /* Layout */
+  --gutter: clamp(1rem, 4vw, 4.5rem);
+
+  /* Viewport height (dvh with vh fallback) */
+  --vh: 100vh;
+
+  /* Live cursor position (updated by js/app.js through a stylesheet rule) */
+  --cursor-x: -50vw;
+  --cursor-y: -50vh;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --vh: 100dvh;
+  }
+}
+
+/* Theme classes */
+.theme-violet { --theme-bg: var(--theme-violet); }
+.theme-slate { --theme-bg: var(--theme-slate); }
+.theme-forest { --theme-bg: var(--theme-forest); }
