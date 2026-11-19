@@ -1,23 +1,7 @@
 [
   {
-    "id": "interact-vp",
-    "title": "Interact Vice President",
-    "info": "react / google search api / search engine",
-    "description": "A minimal search engine front-end with web, image and news results, powered by Google's search API.",
-    "details": [
-      "Nexus started as a question: how much of a search engine is the interface? Quite a lot, it turns out.",
-      "I built routing between result types, debounced queries to keep API usage sensible, and clear loading states so the app never feels stuck.",
-      "It was my deepest dive into a third-party API so far, rate limits and inconsistent responses included."
-    ],
-    "link": "https://savion-nexus.netlify.app/",
-    "image": "visuals/nexus.gif",
-    "alt": "Animated preview of the Nexus search engine",
-    "theme": "slate",
-    "visible": false
-  },
-  {
     "id": "ted",
-    "title": "TedEd Student Talks",
+    "title": "TED Student Talks",
     "info": "Club Mentor",
     "description": "Led members of the TED-Ed club at DBIS alongside co-leads and mentors to guide diverse student talks through a rigorous process while discovering a new passion for Mathematics.",
     "details": [
