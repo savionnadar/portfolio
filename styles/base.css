@@ -120,7 +120,8 @@ img {
   font-weight: 600;
   line-height: 1;
   text-decoration: none;
-  font-size: var(--name-size);
+  /* --fit < 1 only when js/app.js finds the title too wide for its space */
+  font-size: calc(var(--name-size) * var(--fit, 1));
 }
 
 /* Show whole glyphs: no clipping box or upward shift on wrapped titles */

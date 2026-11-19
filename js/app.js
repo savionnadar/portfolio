@@ -195,6 +195,54 @@ function renderHighlights(entries) {
   curtain.append(...entries.map((entry, i) => buildHighlight(entry, i, entries.length)));
   splitAll(curtain);
   applyCurtainGeometry(entries.length);
+  applyNextColours(entries);
+  initHighlightFit();
+}
+
+/**
+ * Each highlight paints the next slide's colour behind its rounded corners
+ * (see highlights.css); the last one uses the page colour of the projects
+ * section that follows. Layer 1 is the hero, so highlight i is child i + 2.
+ */
+function applyNextColours(entries) {
+  const rules = entries.map((entry, i) => {
+    const next = i + 1 < entries.length ? `var(--theme-${themeFor(entries[i + 1], i + 1)})` : "var(--color-bg-light)";
+    return `.curtain > .highlight:nth-child(${i + 2}) { --next-bg: ${next}; }`;
+  });
+  writeStyles("highlight-next", rules.join("\n"));
+}
+
+/**
+ * A single long word can't wrap, so a big title could run past its column
+ * into the preview image. Each title is measured at full size and, if its
+ * widest word doesn't fit, shrunk (--fit, see base.css) until it does.
+ * Re-measured on resize and once fonts load.
+ */
+function initHighlightFit() {
+  const fit = () => {
+    writeStyles("highlight-fit", "");
+    const rules = [];
+    for (const name of $$(".highlight .name")) {
+      const space = name.parentElement.clientWidth;
+      const widest = Math.max(0, ...$$(".split__word", name).map((word) => word.offsetWidth));
+      if (space > 0 && widest > space) rules.push(`#${CSS.escape(name.id)} { --fit: ${(space / widest).toFixed(4)}; }`);
+    }
+    writeStyles("highlight-fit", rules.join("\n"));
+  };
+
+  let queued = false;
+  const queue = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      fit();
+    });
+  };
+
+  fit();
+  document.fonts?.ready.then(fit);
+  window.addEventListener("resize", queue);
 }
 
 /* --------------------------------------------------------------- projects */
@@ -409,11 +457,72 @@ function initCurtainReveals() {
   revealWhenUncovered($(".curtain-reveal__panel[data-reveal]"), layers.at(-1));
 }
 
+/* ------------------------------------------------------------- hero name */
+
+/**
+ * Desktop only: stretches the hero names sideways so their tightly spaced
+ * letters fill their space (see hero.css): "savion" up to the short text
+ * beside it, "nadar" across the whole row. Re-measured on resize and once
+ * fonts load. Scaling starts from each word's left edge, which never moves.
+ */
+function initHeroStretch() {
+  const first = $(".intro .firstName .cont");
+  const last = $(".intro .lastName .cont");
+  const desc = $(".intro .desc");
+  if (!first || !last || !desc) return;
+  const desktop = window.matchMedia("(min-width: 731px)");
+
+  // Current font-size factor of "savion", so its full-size width can be worked out.
+  let fit = 1;
+
+  const measure = () => {
+    if (!desktop.matches) {
+      fit = 1;
+      return writeStyles("hero-stretch", "");
+    }
+    const gutter = parseFloat(getComputedStyle(last).marginLeft) || 0;
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    // Clear space kept between "savion" and the short text beside it.
+    const gap = Math.max(gutter, 2.5 * rem);
+
+    // "savion": stretch to the text if there's room; otherwise shrink to fit.
+    const firstSpace = desc.getBoundingClientRect().left - gap - first.getBoundingClientRect().left;
+    const firstNatural = first.offsetWidth / fit;
+    fit = Math.min(1, firstSpace / firstNatural);
+    const savion = Math.max(1, firstSpace / (firstNatural * fit));
+
+    // "nadar": stretch across the whole row.
+    const lastSpace = last.parentElement.getBoundingClientRect().right - gutter - last.getBoundingClientRect().left;
+    const nadar = Math.max(1, lastSpace / last.offsetWidth);
+
+    writeStyles(
+      "hero-stretch",
+      `.intro .firstName .cont { --fit: ${fit.toFixed(4)}; --stretch: ${savion.toFixed(4)}; }\n` +
+        `.intro .lastName .cont { --stretch: ${nadar.toFixed(4)}; }`
+    );
+  };
+
+  let queued = false;
+  const queue = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      measure();
+    });
+  };
+
+  measure();
+  document.fonts?.ready.then(measure);
+  window.addEventListener("resize", queue);
+}
+
 /* -------------------------------------------------------------------- boot */
 
 async function init() {
   splitAll();
   prepareLines();
+  initHeroStretch();
   revealOnScroll($$("#about[data-reveal], [data-reveal-lines]"));
 
   initCursor();

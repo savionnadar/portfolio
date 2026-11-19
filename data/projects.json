@@ -2,7 +2,7 @@
   {
     "id": "umatter",
     "title": "uMatter",
-    "info": "react / stream api / chat app",
+    "info": "A judgment-free wellbeing space for students",
     "description": "A safe space for students to reflect, connect, and grow.",
     "details": [
       "uMatter is a judgment-free digital platform designed to break the stigma around school counseling and help students reflect, learn, and reach out without fear.",
@@ -19,12 +19,12 @@
   {
     "id": "biomimetic-patch-sim",
     "title": "Biomimetic Patch Simulation",
-    "info": "react / google search api / search engine",
-    "description": "A minimal search interface with web, image and news results.",
+    "info": "An interactive explainer for a frog- and octopus-inspired drug patch",
+    "description": "A step-by-step visual explainer of a glue-free, self-dosing patch inspired by tree frogs and blue-ringed octopuses.",
     "details": [
-      "An interactive biomimicry explainer for a glue-free, self-dosing patch that uses tree-frog-inspired pillars for moisture-assisted grip and sweat drainage, and blue-ringed octopus-inspired gel needles that trigger drug release at body heat (35–37 °C) without a battery[cite: 1].",
-      "Built as a self-contained HTML, CSS, and JavaScript app featuring a scaled Canvas cross-section, six guided steps with camera transitions, live temperature and time readouts, and an SVG release curve over 48 hours[cite: 1].",
-      "Key lessons: scaling biological structures across micrometre-to-millimetre dimensions, pacing step-by-step visual explanations, and clearly separating illustrative behavior from real measured data[cite: 1]."
+      "An interactive biomimicry explainer for a glue-free, self-dosing patch that uses tree-frog-inspired pillars for moisture-assisted grip and sweat drainage, and blue-ringed octopus-inspired gel needles that trigger drug release at body heat (35–37 °C) without a battery.",
+      "Built as a self-contained HTML, CSS, and JavaScript app featuring a scaled Canvas cross-section, six guided steps with camera transitions, live temperature and time readouts, and an SVG release curve over 48 hours.",
+      "Key lessons: scaling biological structures across micrometre-to-millimetre dimensions, pacing step-by-step visual explanations, and clearly separating illustrative behavior from real measured data."
     ],
     "link": "https://nm.savionnadar.com/",
     "image": "visuals/biomimetic-patch-sim.png",
@@ -36,7 +36,7 @@
   {
     "id": "scribe",
     "title": "scribe",
-    "info": "static / local storage / notes app",
+    "info": "A private notes app that never leaves your browser",
     "description": "A privacy-friendly notes app that stores everything in the browser.",
     "details": [
       "Scribe is a lightweight notes app written in plain HTML, CSS and JavaScript.",

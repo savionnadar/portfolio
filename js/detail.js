@@ -96,7 +96,7 @@ function render(entry, entries, index, type) {
   const link = field("link");
   if (typeof entry.link === "string" && entry.link.trim()) {
     link.href = entry.link.trim();
-    link.setAttribute("aria-label", `visit ${entry.title} (opens in a new tab)`);
+    link.setAttribute("aria-label", `learn more about ${entry.title} (opens in a new tab)`);
     link.hidden = false;
   }
 

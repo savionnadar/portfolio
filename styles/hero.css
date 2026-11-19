@@ -153,6 +153,28 @@
   justify-content: center;
 }
 
+/* ---- Desktop: both names stretched to fill their space ----
+   Letters sit close together and each word is stretched sideways: "savion"
+   up to the short text beside it, "nadar" across the full width.
+   js/app.js measures the words and writes --stretch on each. */
+@media (min-width: 731px) {
+  .intro .firstName .cont,
+  .intro .lastName .cont {
+    justify-content: flex-start;
+    gap: 0.07em;
+    width: max-content;
+    padding: 0;
+    margin-left: var(--gutter);
+    transform: scaleX(var(--stretch, 1));
+    transform-origin: left center;
+  }
+
+  /* On narrower screens "savion" shrinks (--fit < 1) rather than run into the text */
+  .intro .firstName .cont {
+    font-size: calc(var(--hero-size) * var(--fit, 1));
+  }
+}
+
 /* ---- Phones / portrait ---- */
 @media (max-width: 730px) {
   .intro {
