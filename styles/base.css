@@ -91,12 +91,41 @@ body {
   overflow-x: clip;
 }
 
+/* ---- Text selection ----
+   Selected text swaps its section's two colours: the text colour becomes the
+   highlight and the background becomes the text. So a selection is always
+   readable, on the light page and on every dark or coloured slide alike.
+   Sections set --selection-bg / --selection-text to their own pair. */
+:root {
+  --selection-bg: var(--color-text);
+  --selection-text: var(--color-bg-light);
+}
+
+/* Dark sections: light highlight, dark text */
+.projIntro,
+.foot,
+.splash,
+.nf-page {
+  --selection-bg: var(--color-text-inverse);
+  --selection-text: var(--color-bg-dark);
+}
+
+/* Themed slides, project pages and hovered project rows use their theme */
+.highlight,
+.detail-page,
+.project-row a:is(:hover, :focus-visible, .is-cursor-target) {
+  --selection-bg: var(--theme-text, var(--color-text-inverse));
+  --selection-text: var(--theme-bg, var(--color-bg-dark));
+}
+
 ::-moz-selection {
-  color: var(--color-selection-alt);
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 ::selection {
-  color: var(--color-selection);
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 :focus-visible {
@@ -107,7 +136,18 @@ body {
 a {
   color: inherit;
   text-decoration: underline;
-  transition: scale 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    scale 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    font-weight 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Weight shift: on hover (or keyboard focus) a link's text smoothly thickens.
+   Oswald is a variable font, so every weight in between is drawn. Left out:
+   the big Six Caps titles (that font has only one weight), project rows and
+   the cursor's "open" bubble. Links that are already medium weight go a step
+   bolder (--link-weight-hover). */
+a:not(.display-name, .project-row a, .cursor__open):is(:hover, :focus-visible) {
+  font-weight: var(--link-weight-hover, 500);
 }
 
 a:hover {
@@ -122,6 +162,20 @@ a:active {
   scale: 0.97;
 }
 
+/* Magnetic links: js/magnetic.js marks links near the pointer with
+   [data-magnetic] and writes --pull-x / --pull-y; they ease towards it and
+   spring back. Inline links become inline-block so they can move. */
+[data-magnetic] {
+  translate: var(--pull-x, 0px) var(--pull-y, 0px);
+  transition:
+    translate 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    scale 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+    font-weight 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-magnetic].is-inline {
+  display: inline-block;
+}
 ul,
 ol {
   list-style: none;

@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Savion Nadar's portfolio website | Computer Science and AI undergraduate." />
-    <script>document.documentElement.classList.add("js");</script>
+    <script>
+      document.documentElement.classList.add("js");
+      // The splash plays once per visit: coming back from a highlight or
+      // project (or refreshing) skips it. sessionStorage lasts until the tab closes.
+      try {
+        if (sessionStorage.getItem("splash-seen")) document.documentElement.classList.add("no-splash");
+        else sessionStorage.setItem("splash-seen", "1");
+      } catch (error) {
+        /* storage blocked: just play the splash */
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Six+Caps&display=swap" />
@@ -37,6 +47,8 @@
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
     <script src="js/smooth.js" defer></script>
     <script src="js/tab-title.js" defer></script>
+    <script src="js/scrollbar.js" defer></script>
+    <script src="js/magnetic.js" defer></script>
     <script src="js/app.js" defer></script>
   </head>
   <body>
@@ -70,8 +82,11 @@
                   <span>I like hard problems,</span>
                   <span>and I finish what I start.</span>
                 </p>
-                <p class="el3 stagger">
-                  <span>Philippians 4:13</span>
+                <!-- Hidden verse: hovering, clicking or focusing the reference
+                     gently unfolds the verse beneath it (js/app.js) -->
+                <p class="el3 stagger" data-verse>
+                  <span class="verse-ref" role="button" tabindex="0" aria-expanded="false" aria-controls="verse-text">Philippians 4:13</span>
+                  <span class="verse" id="verse-text"><span>"I can do all things through Christ who strengthens me."</span></span>
                 </p>
               </div>
               <div class="el4">
@@ -166,7 +181,7 @@
       </div>
       <div class="bottom">
         <div class="brief">
-          <span>Computer Science and AI Undergraduate</span>
+          <span>CS &amp; AI Undergrad</span>
         </div>
         <div class="name" aria-hidden="true">
           <div class="firstName"><div class="cont" data-split>savion</div></div>

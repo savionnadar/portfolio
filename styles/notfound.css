@@ -21,10 +21,6 @@
   text-decoration: none;
 }
 
-.nf a:hover {
-  text-decoration: underline;
-}
-
 .nf__home {
   justify-self: start;
   font-size: var(--text-ui-m);
@@ -80,6 +76,7 @@
   margin-top: 1svh;
   font-size: var(--text-ui-m);
   font-weight: 400;
+  --link-weight-hover: 650; /* already medium, so hover goes a step bolder */
 }
 
 .nf__foot {

@@ -28,6 +28,8 @@
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
     <script src="js/smooth.js" defer></script>
     <script src="js/tab-title.js" defer></script>
+    <script src="js/scrollbar.js" defer></script>
+    <script src="js/magnetic.js" defer></script>
     <script src="js/detail.js" defer></script>
   </head>
   <body class="detail-page">
@@ -47,14 +49,16 @@
         <div class="detail__count" data-field="count" aria-hidden="true"></div>
         <p class="detail__info" data-field="info"></p>
         <h1 class="detail__name display-name" data-field="title"></h1>
+        <!-- The one-line summary sits right under the title so it's visible
+             without scrolling; the full write-up follows the image. -->
+        <p class="detail__lead" data-field="description"></p>
 
         <div class="detail__preview" data-field="media" hidden>
           <img data-field="image" alt="" decoding="async" width="1600" height="1000" />
         </div>
 
-        <div class="detail__body">
+        <div class="detail__body" id="more">
           <div>
-            <p class="detail__lead" data-field="description"></p>
             <div class="detail__text" data-field="details"></div>
             <a class="detail__link" data-field="link" target="_blank" rel="noopener" hidden>learn more ↗</a>
           </div>

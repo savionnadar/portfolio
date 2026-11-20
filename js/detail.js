@@ -88,6 +88,7 @@ function render(entry, entries, index, type) {
   field("info").hidden = !entry.info;
   splitInto(field("title"), entry.title);
   field("description").textContent = entry.description || "";
+  field("description").hidden = !entry.description;
 
   const raw = entry.details ?? "";
   const paragraphs = (Array.isArray(raw) ? raw : String(raw).split(/\n{2,}/)).map((t) => String(t).trim()).filter(Boolean);

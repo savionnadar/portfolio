@@ -21,8 +21,6 @@
   --color-text: var(--color-ink);
   /* Text on dark sections (highlights intro, footer, cursor label) */
   --color-text-inverse: var(--color-paper);
-  --color-selection: var(--color-grey);
-  --color-selection-alt: var(--color-grey);
   --color-skill: var(--color-ink);
   --color-skill-track: var(--color-ink-faint);
   --color-glass: rgba(255, 255, 255, 0.25);

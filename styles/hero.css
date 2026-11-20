@@ -37,7 +37,6 @@
 .intro .lastName {
   grid-area: area2;
 }
-
 .intro .desc {
   grid-area: area3;
 }
@@ -95,10 +94,6 @@
   text-decoration: none;
 }
 
-.desc .el4 a:hover > span:first-child {
-  text-decoration: underline;
-}
-
 .scroll-cue {
   position: relative;
   width: 0.85em;
@@ -124,6 +119,52 @@
 .desc .cont .el3 {
   display: flex;
   flex-direction: column;
+}
+
+/* ---- Hidden verse ----
+   "Philippians 4:13" unfolds the verse beneath it on hover, click or focus
+   (js/app.js toggles .is-open). The verse row grows from 0 to its natural
+   height, so the text below eases down instead of jumping. */
+.desc .cont .el3 {
+  align-items: flex-start;
+}
+
+.verse-ref {
+  cursor: pointer;
+  transition: font-weight 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.verse {
+  display: grid;
+  grid-template-rows: 0fr;
+  max-width: 24ch;
+  transition:
+    grid-template-rows 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The fade lives on the inner text: the hero's entrance animation already
+   controls the opacity of each line in this paragraph */
+.verse > span {
+  overflow: hidden;
+  min-height: 0;
+  font-style: italic;
+  text-transform: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.el3.is-open .verse-ref {
+  font-weight: 500;
+}
+
+.el3.is-open .verse {
+  grid-template-rows: 1fr;
+  margin-top: 0.4em;
+}
+
+.el3.is-open .verse > span {
+  opacity: 0.85;
 }
 
 /* ---- Highlights intro ---- */

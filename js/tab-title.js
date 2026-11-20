@@ -8,7 +8,14 @@
 "use strict";
 
 (() => {
-  const MESSAGES = ["HAVE A GREAT DAY!", "KEEP AT IT!", "YOU'VE GOT THIS!", "STAY AWESOME!"];
+  const MESSAGES = [
+    "HAVE A GREAT DAY!",
+    "KEEP AT IT!",
+    "YOU'VE GOT THIS!",
+    "STAY AWESOME!",
+    "TAKE IT EASY",
+    "WISHING YOU WELL",
+  ];
 
   let saved = null;
 

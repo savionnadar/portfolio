@@ -1,10 +1,21 @@
 /* =========================================================================
    animations.css — keyframes and entrance animations (staggered with --i)
    ========================================================================= */
-/* How much longer the greeting stays than it used to. The splash and the
-   hero's entrance animations are all pushed back by this much. */
+/* --splash-hold: how much longer the greeting stays than it used to.
+   --intro-start: when the hero's entrance animations begin, i.e. once the
+   splash has gone. On return visits in the same tab (html.no-splash, set in
+   index.html) the splash is skipped and the hero starts right away. */
 :root {
   --splash-hold: 0.9s;
+  --intro-start: calc(2s + var(--splash-hold));
+}
+
+.no-splash {
+  --intro-start: 0.15s;
+}
+
+.no-splash .splash {
+  display: none;
 }
 
 /* Greeting letters rise in, rest in place for a beat, then roll up and out */
@@ -83,23 +94,23 @@
 
 .intro .firstName .cont > *,
 .intro .lastName .cont > * {
-  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) calc(2s + var(--splash-hold) + var(--i, 0) * 0.05s) both;
+  animation: lgTextRoll 1.5s cubic-bezier(0.35, 1, 0.77, 1.01) calc(var(--intro-start) + var(--i, 0) * 0.05s) both;
 }
 
 .desc .cont .el1 > span {
-  animation: smTextRoll 1.5s both calc(2.3s + var(--splash-hold) + var(--i, 0) * 0.15s);
+  animation: smTextRoll 1.5s both calc(var(--intro-start) + 0.3s + var(--i, 0) * 0.15s);
 }
 
 .desc .cont .el2 > span {
-  animation: smTextRoll 1.5s both calc(2.95s + var(--splash-hold) + var(--i, 0) * 0.15s);
+  animation: smTextRoll 1.5s both calc(var(--intro-start) + 0.95s + var(--i, 0) * 0.15s);
 }
 
 .desc .cont .el3 > span {
-  animation: smTextRoll 1.5s both calc(3.35s + var(--splash-hold) + var(--i, 0) * 0.15s);
+  animation: smTextRoll 1.5s both calc(var(--intro-start) + 1.35s + var(--i, 0) * 0.15s);
 }
 
 .desc .el4 a {
-  animation: smTextRoll 1.5s both calc(4s + var(--splash-hold));
+  animation: smTextRoll 1.5s both calc(var(--intro-start) + 2s);
 }
 
 @keyframes scrollCue {
@@ -222,16 +233,17 @@
 
 /* Detail page: everything simply fades in, top to bottom, once loaded */
 .detail__top,
-:is(.detail__count, .detail__info, .detail__name, .detail__preview, .detail__body, .detail__pager) {
+:is(.detail__count, .detail__info, .detail__name, .detail__lead, .detail__preview, .detail__body, .detail__pager) {
   animation: fadeIn 1.4s ease both;
 }
 
 .detail__count { animation-delay: 0.2s; }
 .detail__info { animation-delay: 0.1s; }
 .detail__name { animation-delay: 0.25s; }
-.detail__preview { animation-delay: 0.45s; }
-.detail__body { animation-delay: 0.6s; }
-.detail__pager { animation-delay: 0.75s; }
+.detail__lead { animation-delay: 0.4s; }
+.detail__preview { animation-delay: 0.55s; }
+.detail__body { animation-delay: 0.7s; }
+.detail__pager { animation-delay: 0.85s; }
 
 @media (prefers-reduced-motion: reduce) {
   html {

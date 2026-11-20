@@ -341,201 +341,137 @@ function initCursor() {
   });
 }
 
-/* ------------------------------------------------------- magnetic socials */
+/* ------------------------------------------------------------ personality */
+
+const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
- * Footer social links lean towards the pointer when it comes near and spring
- * back when it moves away (the easing lives in footer.css). The pull is
- * written as --pull-x / --pull-y on each link. Mouse devices only, and off
- * for reduced motion.
+ * Hidden verse: "Philippians 4:13" unfolds the verse beneath it (hero.css).
+ * Mouse: opens while hovered; a click pins it open (click again to close).
+ * Touch and keyboard: tap / Enter / Space toggles it.
  */
-function initMagneticLinks() {
-  const links = $$(".foot .socials .links a");
-  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!links.length || !fine || reduce) return;
+function initVerse() {
+  const block = $("[data-verse]");
+  const ref = block && $(".verse-ref", block);
+  if (!ref) return;
+  let pinned = false;
 
-  const RANGE = 40; // px from a link's edge where the pull starts
-  const STRENGTH = 0.05; // share of the distance to the pointer
-  const MAX = 2; // px, largest lean
-  const footer = $(".foot");
-  let pointer = null;
-  let queued = false;
-
-  const pull = (link, x, y) => {
-    link.style.setProperty("--pull-x", `${x.toFixed(1)}px`);
-    link.style.setProperty("--pull-y", `${y.toFixed(1)}px`);
+  const set = (open) => {
+    block.classList.toggle("is-open", open);
+    ref.setAttribute("aria-expanded", String(open));
   };
 
-  const update = () => {
-    queued = false;
-    const inView = pointer && footer.getBoundingClientRect().top < window.innerHeight;
-    for (const link of links) {
-      if (!inView) {
-        pull(link, 0, 0);
-        continue;
-      }
-      // Measure without the current lean, so the pull doesn't feed on itself.
-      const box = link.getBoundingClientRect();
-      const cx = box.left + box.width / 2 - (parseFloat(link.style.getPropertyValue("--pull-x")) || 0);
-      const cy = box.top + box.height / 2 - (parseFloat(link.style.getPropertyValue("--pull-y")) || 0);
-      const dx = pointer.x - cx;
-      const dy = pointer.y - cy;
-      const near = Math.abs(dx) < box.width / 2 + RANGE && Math.abs(dy) < box.height / 2 + RANGE;
-      const clamp = (v) => Math.max(-MAX, Math.min(MAX, v * STRENGTH));
-      pull(link, near ? clamp(dx) : 0, near ? clamp(dy) : 0);
-    }
-  };
-
-  const queue = () => {
-    if (!queued) {
-      queued = true;
-      requestAnimationFrame(update);
-    }
-  };
-
-  document.addEventListener("pointermove", (event) => {
-    if (event.pointerType !== "mouse") return;
-    pointer = { x: event.clientX, y: event.clientY };
-    queue();
+  block.addEventListener("pointerenter", (event) => event.pointerType === "mouse" && set(true));
+  block.addEventListener("pointerleave", (event) => event.pointerType === "mouse" && !pinned && set(false));
+  ref.addEventListener("click", () => {
+    pinned = !pinned;
+    set(pinned);
   });
-  document.documentElement.addEventListener("mouseleave", () => {
-    pointer = null;
-    queue();
+  ref.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    pinned = !pinned;
+    set(pinned);
   });
 }
 
-/* -------------------------------------------------------------- scrollbar */
-
 /**
- * A floating scrollbar pill with no track (see base.css). The native
- * scrollbar is hidden on mouse devices, because it always paints a solid
- * strip, and this pill is drawn over the page instead:
- * - its size and position follow the page (--thumb-h / --thumb-y)
- * - it turns light over dark sections (.is-on-dark) and dark over light ones
- * - it appears while scrolling or when the pointer nears the right edge,
- *   and fades out after a moment of stillness
- * - it can be dragged, like a normal scrollbar
- * Must run before anything measures the page width, since hiding the native
- * scrollbar makes the page a little wider. Touch devices keep their own.
+ * Footer name shuffle: hovering (or tapping) "SAVION NADAR" scrambles the
+ * letters into a short phrase, holds it for a moment, then scrambles back.
+ * Each phrase is [top word, bottom word], like the first and last name.
+ * Words can be any length: letters are added or removed as the scramble
+ * starts (hidden by the scramble itself), and the row re-spaces to fill the
+ * width just like the name does.
  */
-function initScrollbar() {
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+function initNameShuffle() {
+  const name = $(".foot .name");
+  const rows = [$(".foot .firstName .cont"), $(".foot .lastName .cont")];
+  if (!name || !rows[0] || !rows[1] || prefersReducedMotion()) return;
 
-  const root = document.documentElement;
-  root.classList.add("has-scrollbar");
-  const thumb = el("div", { className: "scrollbar__thumb" });
-  const bar = el("div", { className: "scrollbar", attrs: { "aria-hidden": "true" } }, [thumb]);
-  document.body.append(bar);
+  const PHRASES = [
+    ["see ya", "later"],
+    ["glad u", "came!"],
+    ["take", "care!"],
+    ["catch ya", "later!"],
+    ["until", "next time"],
+  ];
+  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const TICK = 40; // ms per scramble frame
+  const HOLD = 1600; // ms the phrase stays
+  const NBSP = String.fromCharCode(160); // keeps a space as a visible gap
+  const letters = (row) => [...row.children];
+  const original = rows.map((row) => letters(row).map((span) => span.textContent).join(""));
+  let running = false;
+  let lastPhrase = -1;
 
-  const HIDE_AFTER = 1200; // ms of stillness before the pill fades
-  const EDGE = 24; // px from the right edge that wakes the pill
-  let queued = false;
-  let hideTimer = 0;
-  let nearEdge = false;
-  let drag = null;
-  let onDark = null;
+  const show = (char) => (char === " " ? NBSP : char);
+  const randomGlyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
 
-  const isDark = (color) => {
-    const [r, g, b, a = 1] = (color.match(/[\d.]+/g) || []).map(Number);
-    return a > 0 && 0.2126 * r + 0.7152 * g + 0.0722 * b < 140;
+  /** Give a row exactly `count` letter spans (copies of its first one). */
+  const resize = (row, count) => {
+    const spans = letters(row);
+    for (let i = spans.length; i < count; i += 1) {
+      const span = spans[0].cloneNode(false);
+      span.className = "";
+      span.textContent = randomGlyph();
+      row.append(span);
+    }
+    letters(row)
+      .slice(count)
+      .forEach((span) => span.remove());
   };
 
-  /** Is the section beside the pill (at mid-height) a dark one? */
-  const sectionIsDark = () => {
-    const node = document
-      .elementsFromPoint(root.clientWidth - 6, window.innerHeight / 2)
-      .find((n) => !bar.contains(n));
-    const section = node?.closest(".highlight, .projIntro, .foot");
-    if (!section) return false;
-    const bg = section.classList.contains("highlight")
-      ? getComputedStyle(section, "::before").backgroundColor
-      : getComputedStyle(section).backgroundColor;
-    return isDark(bg);
-  };
-
-  const metrics = () => {
-    const view = window.innerHeight;
-    const max = root.scrollHeight - view;
-    const height = Math.max(36, (view * view) / root.scrollHeight);
-    return { view, max, height, travel: view - height };
-  };
-
-  const update = () => {
-    queued = false;
-    const m = metrics();
-    bar.hidden = m.max <= 0;
-    const y = m.max > 0 ? (window.scrollY / m.max) * m.travel : 0;
-    bar.style.setProperty("--thumb-h", `${m.height.toFixed(1)}px`);
-    bar.style.setProperty("--thumb-y", `${y.toFixed(1)}px`);
-    const dark = sectionIsDark();
-    if (dark !== onDark) {
-      onDark = dark;
-      bar.classList.toggle("is-on-dark", dark);
+  /** Condense any row whose letters are wider than the row (--fit-x). */
+  const fitRows = () => {
+    for (const row of rows) {
+      const fit = Math.min(1, row.clientWidth / Math.max(1, row.scrollWidth));
+      if (fit < 1) row.style.setProperty("--fit-x", fit.toFixed(3));
+      else row.style.removeProperty("--fit-x");
     }
   };
 
-  const queue = () => {
-    if (!queued) {
-      queued = true;
-      requestAnimationFrame(update);
-    }
+  /** Scramble every letter, settling them left to right onto `target`. */
+  const scrambleTo = (target) =>
+    new Promise((resolve) => {
+      rows.forEach((row, r) => {
+        const count = [...target[r]].length;
+        resize(row, count);
+        // Each word gets width in proportion to its letters, so a short top
+        // word and a long bottom word stay evenly spaced. Back to the name's
+        // own layout (footer.css) once it returns.
+        if (target === original) row.parentElement.style.removeProperty("flex-grow");
+        else row.parentElement.style.flexGrow = String(count);
+      });
+      const all = rows.flatMap((row, r) => letters(row).map((span, i) => ({ span, char: [...target[r]][i] })));
+      let frame = 0;
+      const timer = setInterval(() => {
+        all.forEach(({ span, char }, index) => {
+          span.textContent = frame >= 4 + index * 1.5 ? show(char) : randomGlyph();
+        });
+        fitRows();
+        frame += 1;
+        if (frame > 4 + all.length * 1.5) {
+          clearInterval(timer);
+          resolve();
+        }
+      }, TICK);
+    });
+
+  const play = async () => {
+    if (running) return;
+    running = true;
+    let pick;
+    do pick = Math.floor(Math.random() * PHRASES.length);
+    while (pick === lastPhrase && PHRASES.length > 1);
+    lastPhrase = pick;
+    await scrambleTo(PHRASES[pick]);
+    await new Promise((resolve) => setTimeout(resolve, HOLD));
+    await scrambleTo(original);
+    running = false;
   };
 
-  const show = () => {
-    bar.classList.add("is-active");
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-      if (!drag && !nearEdge) bar.classList.remove("is-active");
-    }, HIDE_AFTER);
-  };
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      queue();
-      show();
-    },
-    { passive: true }
-  );
-  window.addEventListener("resize", queue);
-  new ResizeObserver(queue).observe(document.body); // page height changes (data loaded etc.)
-
-  document.addEventListener("pointermove", (event) => {
-    if (drag) {
-      const m = metrics();
-      const target = drag.scroll + (event.clientY - drag.y) * (m.max / Math.max(1, m.travel));
-      const clamped = Math.max(0, Math.min(m.max, target));
-      if (window.smoothScroll) window.smoothScroll.scrollTo(clamped, { immediate: true });
-      else window.scrollTo(0, clamped);
-      return;
-    }
-    const near = event.clientX >= root.clientWidth - EDGE;
-    if (near !== nearEdge) {
-      nearEdge = near;
-      if (near) show();
-    }
-  });
-
-  thumb.addEventListener("pointerdown", (event) => {
-    if (event.button !== 0) return;
-    event.preventDefault();
-    drag = { y: event.clientY, scroll: window.scrollY };
-    thumb.setPointerCapture(event.pointerId);
-    bar.classList.add("is-dragging");
-    show();
-  });
-
-  const endDrag = () => {
-    if (!drag) return;
-    drag = null;
-    bar.classList.remove("is-dragging");
-    show();
-  };
-  thumb.addEventListener("pointerup", endDrag);
-  thumb.addEventListener("pointercancel", endDrag);
-
-  queue();
+  name.addEventListener("pointerenter", play);
+  name.addEventListener("click", play);
 }
 
 /* --------------------------------------------------------------- greeting */
@@ -609,6 +545,7 @@ function initSkills(skills) {
     );
   });
   writeStyles("skill-levels", rules.join("\n"));
+  initSkillsPause(root);
 
   if (!("IntersectionObserver" in window)) {
     root.classList.add("is-filled");
@@ -624,6 +561,41 @@ function initSkills(skills) {
     { threshold: 0.5 }
   );
   observer.observe(root);
+}
+
+/**
+ * Hovering the skills strip glides it to a stop so the rings can be read,
+ * and leaving eases it back up to speed. Rather than freezing it instantly,
+ * the marquee animation's playback rate is eased from its current speed to
+ * the target over a short moment. Mouse devices only.
+ */
+function initSkillsPause(root) {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+  const DURATION = 700; // ms to slow down or speed up
+  const easeOut = (t) => 1 - (1 - t) ** 3;
+  let rate = 1;
+  let frame = 0;
+
+  /** The looping marquee animations (not the rings' fill transitions). */
+  const marquee = () =>
+    root.getAnimations({ subtree: true }).filter((a) => a.animationName === "infScroll");
+
+  const glideTo = (target) => {
+    cancelAnimationFrame(frame);
+    const from = rate;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / DURATION);
+      rate = from + (target - from) * easeOut(t);
+      for (const animation of marquee()) animation.playbackRate = rate;
+      if (t < 1) frame = requestAnimationFrame(step);
+    };
+    frame = requestAnimationFrame(step);
+  };
+
+  root.addEventListener("pointerenter", (event) => event.pointerType === "mouse" && glideTo(0));
+  root.addEventListener("pointerleave", (event) => event.pointerType === "mouse" && glideTo(1));
 }
 
 /* ----------------------------------------------------------------- reveals */
@@ -752,7 +724,6 @@ function initHeroStretch() {
 /* -------------------------------------------------------------------- boot */
 
 async function init() {
-  initScrollbar(); // first: hiding the native scrollbar changes the page width
   setGreeting();
   splitAll();
   prepareLines();
@@ -760,7 +731,8 @@ async function init() {
   revealOnScroll($$("#about[data-reveal], [data-reveal-lines]"));
 
   initCursor();
-  initMagneticLinks();
+  initVerse();
+  initNameShuffle();
   applyCurtainGeometry(0);
 
   const [highlights, projects, skills] = await Promise.allSettled([

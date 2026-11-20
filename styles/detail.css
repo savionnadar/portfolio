@@ -29,10 +29,6 @@
   text-decoration: none;
 }
 
-.detail__top a:hover {
-  text-decoration: underline;
-}
-
 .detail__count {
   position: absolute;
   top: 2svh;
@@ -53,16 +49,19 @@
   font-weight: 300;
 }
 
+/* Smaller than the home page titles (--fit scales the shared title size), so
+   the title, summary and the top of the image all fit on the first screen */
 .detail__name {
   position: relative;
+  --fit: 0.62;
 }
 
 .detail__preview {
   position: relative;
   width: min(100%, 64rem);
   aspect-ratio: 16 / 10;
-  max-height: 70svh;
-  margin: 5svh 0;
+  max-height: 58svh;
+  margin: 4svh 0 5svh;
 }
 
 .detail__preview img {
@@ -80,11 +79,12 @@
 }
 
 .detail__lead {
+  position: relative;
   font-family: var(--font-ui);
   font-size: clamp(1.1rem, 0.8rem + 1.4vw, 2rem);
   font-weight: 300;
   max-width: 40ch;
-  margin-bottom: 1em;
+  margin-top: 2svh;
 }
 
 .detail__text {
@@ -120,10 +120,6 @@
 
 .detail__pager a {
   text-decoration: none;
-}
-
-.detail__pager a:hover {
-  text-decoration: underline;
 }
 
 .detail__pager .is-next {

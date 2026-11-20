@@ -25,10 +25,6 @@
   text-decoration: none;
 }
 
-.foot a:hover {
-  text-decoration: underline;
-}
-
 .foot .fa-brands {
   color: var(--color-text-inverse);
   width: 1.2em;
@@ -62,19 +58,10 @@
   gap: 0.5em;
 }
 
-/* Magnetic socials: each link leans towards a nearby pointer and springs
-   back when it leaves (js/app.js writes --pull-x / --pull-y). Links are only
-   as wide as their text so the pull feels centred on the word. */
-.foot .socials .links {
+/* Links are only as wide as their text, so the magnetic lean (base.css)
+   feels centred on the word */
+.foot .top .links {
   align-items: flex-start;
-}
-
-.foot .socials .links a {
-  transform: translate(var(--pull-x, 0px), var(--pull-y, 0px));
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    scale 0.18s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
 }
 
 /* ---- Bottom: tagline, giant name, links ---- */
@@ -82,6 +69,9 @@
   grid-row: 3;
   display: flex;
   flex-direction: column;
+  /* Never grow wider than the footer, even while the name shuffles into a
+     longer phrase (otherwise "back to top" gets pushed off screen) */
+  min-width: 0;
 }
 
 .foot .bottom .brief,
@@ -104,6 +94,15 @@
 .foot .bottom .name > * {
   flex: 1;
   display: flex;
+  min-width: 0;
+}
+
+/* While a shuffle phrase is wider than its row, js/app.js condenses it
+   (--fit-x below 1) so it fits instead of spilling over */
+.foot .firstName .cont,
+.foot .lastName .cont {
+  transform: scaleX(var(--fit-x, 1));
+  transform-origin: left center;
 }
 
 .foot .firstName .cont,
@@ -112,7 +111,10 @@
   font-size: min(27vw, 34svh, 25rem);
   font-weight: 600;
   display: flex;
-  overflow: hidden;
+  /* Clip only top and bottom (the tall letters are shifted up inside a
+     1em box). The sides stay open so a long shuffle phrase can be condensed
+     into view (--fit-x) instead of being cut off at the row's edge. */
+  clip-path: inset(0 -100vw);
   width: 100%;
   height: 1em;
   justify-content: space-between;
