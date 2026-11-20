@@ -15,6 +15,7 @@
 const DATA = {
   highlights: "data/highlights.json",
   projects: "data/projects.json",
+  skills: "data/skills.json",
 };
 const THEMES = ["black", "silver", "grey"];
 
@@ -557,24 +558,41 @@ function setGreeting() {
 /* ------------------------------------------------------------------ skills */
 
 /**
- * Builds the skills marquee from the <li data-level> list:
- * wraps each label, clones the set for a seamless loop and writes each ring's
- * fill level, fill duration and start delay into a generated stylesheet.
+ * Loads data/skills.json: [{ "name": "HTML", "level": 95, "visible": true }].
+ * Entries without a name are skipped, as are ones with "visible": false
+ * (visible may be left out). "level" is clamped to 0–100.
  */
-function initSkills() {
+async function fetchSkills(url) {
+  const response = await fetch(url, { headers: { Accept: "application/json" } });
+  if (!response.ok) throw new Error(`Could not load ${url} (HTTP ${response.status})`);
+  const data = await response.json();
+  if (!Array.isArray(data)) throw new Error(`${url} must contain a JSON array`);
+  return data
+    .filter((skill) => skill && typeof skill.name === "string" && skill.name.trim() && skill.visible !== false)
+    .map((skill) => ({ name: skill.name.trim(), level: Math.max(0, Math.min(100, Number(skill.level) || 0)) }));
+}
+
+/**
+ * Builds the skills marquee from data/skills.json: one ring per skill,
+ * a cloned set for a seamless loop, and each ring's fill level, fill
+ * duration and start delay written into a generated stylesheet.
+ */
+function initSkills(skills) {
   const root = $("[data-skills]");
   const list = root && $(".inner", root);
   if (!list) return;
-
-  const items = [...list.children];
-  const count = items.length;
-
-  for (const item of items) {
-    const words = item.textContent.trim().split(/\s+/);
-    item.textContent = "";
-    item.classList.add("skill-ring");
-    item.append(el("span", {}, words.map((word) => el("span", { text: word }))));
+  if (!skills.length) {
+    root.hidden = true;
+    return;
   }
+
+  const items = skills.map(({ name, level }) =>
+    el("li", { className: "skill-ring", attrs: { "data-level": level } }, [
+      el("span", {}, name.split(/\s+/).map((word) => el("span", { text: word }))),
+    ])
+  );
+  list.replaceChildren(...items);
+  const count = items.length;
 
   for (const item of items) {
     const clone = item.cloneNode(true);
@@ -743,10 +761,20 @@ async function init() {
 
   initCursor();
   initMagneticLinks();
-  initSkills();
   applyCurtainGeometry(0);
 
-  const [highlights, projects] = await Promise.allSettled([fetchVisible(DATA.highlights), fetchVisible(DATA.projects)]);
+  const [highlights, projects, skills] = await Promise.allSettled([
+    fetchVisible(DATA.highlights),
+    fetchVisible(DATA.projects),
+    fetchSkills(DATA.skills),
+  ]);
+
+  if (skills.status === "fulfilled") {
+    initSkills(skills.value);
+  } else {
+    console.error(skills.reason);
+    initSkills([]); // hides the marquee rather than showing an empty strip
+  }
 
   if (highlights.status === "fulfilled") {
     renderHighlights(highlights.value);

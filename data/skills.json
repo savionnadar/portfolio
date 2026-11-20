@@ -1,0 +1,14 @@
+[
+  { "name": "HTML", "level": 95, "visible": true },
+  { "name": "CSS", "level": 85, "visible": true },
+  { "name": "JavaScript", "level": 75, "visible": true },
+  { "name": "React", "level": 70, "visible": true },
+  { "name": "Responsive Design", "level": 100, "visible": true },
+  { "name": "Animations", "level": 80, "visible": true },
+  { "name": "API's", "level": 60, "visible": true },
+  { "name": "NodeJS", "level": 60, "visible": true },
+  { "name": "Python", "level": 80, "visible": true },
+  { "name": "CLI", "level": 75, "visible": true },
+  { "name": "AI Prompts", "level": 100, "visible": true },
+  { "name": "Databases", "level": 60, "visible": true }
+]
